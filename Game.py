@@ -163,8 +163,8 @@ shekhtur = Shekhtur(position=1, cards=opp_actions, health=health)
 states = initStates(num_actions=2, max_health=health)
 
 players = [luc, shekhtur]
-states = QLearning(states, players, gamma=0.9, alpha=0.1, epsilon=0.05, episodes=1000000)
-for state_row in states:
+states_after_QLearning = QLearning(states, players, gamma=0.9, alpha=0.1, epsilon=0.05, episodes=1000000)
+for state_row in states_after_QLearning:
     for state in state_row:
         print(state)
-plotValues(states)
+plotValues(states_after_QLearning)
