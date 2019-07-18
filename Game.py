@@ -8,6 +8,7 @@ import copy
 import random
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
+from matplotlib.pyplot import figure
 
 def winner(p1, p2):
     '''
@@ -28,19 +29,19 @@ def winner(p1, p2):
 
 def plotValues(states):
     '''
-    Plots, for each of the 21x21 states, the corresponding value of the best action.
+    Plots, for each of the 21x21 states, the corresponding value and the best action.
     '''
     size_x = np.shape(states)[0]
     size_y = np.shape(states)[1]
-    ax = plt.subplot(111)
+    figure(num=None, figsize=(20, 10), dpi=80, facecolor='w', edgecolor='k')
     vals = np.arange(float(size_x * size_y)).reshape(size_x, size_y)
     for i in range(size_x):
         for j in range(size_y):
             vals[i][j] = np.amax(states[i][j].q_old)
     cmap = plt.get_cmap()
     cmap.set_bad('black')
-    vals = np.ma.masked_equal(vals, 0.0)
-    im = ax.imshow(vals, interpolation = 'nearest', cmap=cmap)
+    masked_vals = np.ma.masked_equal(vals, 0.0)
+    im = plt.imshow(masked_vals, interpolation = 'nearest', cmap=cmap)
     # divider = make_axes_locatable(ax)
     # cax = divider.append_axes("right", size="5%", pad=0.1)
     plt.colorbar(im)
@@ -51,9 +52,10 @@ def plotValues(states):
     plt.ylabel("My Health", size=14)
     for i in range(size_x):
         for j in range(size_y):
-            if np.amax(states[i][j].q_old) == 0:
-                continue
-            plt.annotate(np.argmax(states[i][j].q_old), (i,j), color = 'white')
+            if vals[i][j] == 0.0:
+                continue # We haven't explored all actions in this state
+            plt.annotate(np.argmax(states[i][j]), (j,i), color = 'white')
+
     plt.title("Best action and its value, from your perspective")
     # plt.tight_layout()
     fig = plt.gcf()
