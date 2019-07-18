@@ -83,8 +83,6 @@ def QLearning(passed_states, passed_players, gamma, alpha, epsilon, episodes):
     Arguments:
         passed_states: Q-value states array
         passed_players: list of players: [me, opp]
-        my_actions: list of cards I can play
-        opp_actions: list of cards my opponent can play
         gamma: discount factor, higher/lower gamma means we care more/less about distant rewards
         alpha: Learning rate: trade-off parameter between current state-action estimate and newly observed value.
                               Higher/Lower alpha = more/less weight to newly observed value
@@ -163,7 +161,7 @@ shekhtur = Shekhtur(position=1, cards=opp_actions, health=health)
 states = initStates(num_actions=2, max_health=health)
 
 players = [luc, shekhtur]
-states_after_QLearning = QLearning(states, players, gamma=0.9, alpha=0.1, epsilon=0.05, episodes=1000000)
+states_after_QLearning = QLearning(states, players, gamma=1, alpha=0.1, epsilon=0.05, episodes=1000000)
 for state_row in states_after_QLearning:
     for state in state_row:
         print(state)
