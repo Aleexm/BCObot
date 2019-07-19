@@ -139,7 +139,7 @@ def plotValues(states):
         for j in range(size_y):
             if vals[i][j] == 0.0:
                 continue # We haven't explored all actions in this state
-            plt.annotate(np.argmax(states[i][j].q_old), (j,i), color = 'white')
+            plt.annotate(np.argmax(states[i][j].q_old), (j,i), color = 'red')
 
     plt.title("Best action and its value, from your perspective")
     # plt.tight_layout()
@@ -161,7 +161,7 @@ shekhtur = Shekhtur(position=1, cards=opp_actions, health=health)
 states = initStates(num_actions=2, max_health=health)
 
 players = [luc, shekhtur]
-states_after_QLearning = QLearning(states, players, gamma=1, alpha=0.1, epsilon=0.05, episodes=1000000)
+states_after_QLearning = QLearning(states, players, gamma=1, alpha=0.1, epsilon=0.05, episodes=1000)
 for state_row in states_after_QLearning:
     for state in state_row:
         print(state)
