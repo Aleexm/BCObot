@@ -1,5 +1,6 @@
 from State import State
 from Card import Card
+from Board import Board
 from Character import Character
 from Luc import Luc
 from Shekhtur import Shekhtur
@@ -9,6 +10,7 @@ import random
 import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.pyplot import figure
+import matplotlib.patheffects as path_effects
 
 def winner(p1, p2):
     '''
@@ -27,7 +29,7 @@ def winner(p1, p2):
     else:
         return False
 
-def evalRound(players, played_cards, states):
+def evalRound(board, players, played_cards, states):
     '''
     Evaluates you and your opponent's cards played and updates health. Returns
     the corresponding new state after this round
@@ -46,15 +48,24 @@ def evalRound(players, played_cards, states):
         attacking_player_idx = (first_player + i) % 2 # Initially just firstplayer
         defending_player_idx = (first_player + i + 1) % 2 # Afterwards, other player
         current_card = played_cards[attacking_player_idx] # Get card of attacker
+
+        current_card.executeActions(current_card.start, players, active_player=attacking_player_idx) # START actions
+        played_cards[defending_player_idx].executeActions(current_card.start, active_player=defending_player_idx)
+
         if not stunned[attacking_player_idx]:
+            current_card.executeActions(current_card.before, players, active_player=attacking_player_idx) # BEFORE actions
             if abs(players[attacking_player_idx].position - players[defending_player_idx].position) <= current_card.range: # Hit
                 players[defending_player_idx].health = max(0, players[defending_player_idx].health - current_card.attack) # Clamp hp at 0
                 if played_cards[defending_player_idx].defense < current_card.attack:
                     stunned[defending_player_idx] = True # Stun Guard broken
+            current_card.executeActions(current_card.after, players, active_player=attacking_player_idx) # AFTER actions
 
-    # TODO: If both died, know who won
-    # states[0][0] represents both players at 20hp, so it's inverted.
-    return states[len(states) -1- players[0].health][len(states) -1- players[1].health]
+    # TODO: After effects
+    if players[0].health == players[1].health == 0: # Both died: Winner is slowest player
+        return states[(len(states)-1)*attacking_player_idx][(len(states)-1)*defending_player_idx]
+    else:
+        # states[0][0] represents both players at 20hp, so it's inverted.
+        return states[len(states) -1- players[0].health][len(states) -1- players[1].health]
 
 def initStates(num_actions, max_health):
     '''
@@ -75,7 +86,7 @@ def initStates(num_actions, max_health):
     return states
 
 
-def QLearning(passed_states, passed_players, gamma, alpha, epsilon, episodes):
+def QLearning(passed_states, passed_board, passed_players, gamma, alpha, epsilon, episodes):
     '''
     The learning part! Updates the Q-value states array with learned values for
     each possible action (number of cards that can be played), for each of the 21x21 states.
@@ -97,19 +108,19 @@ def QLearning(passed_states, passed_players, gamma, alpha, epsilon, episodes):
         if episode%10000 == 0:
             print(episode)
         players = copy.deepcopy(passed_players) # Reset all health, position etc to passed values
+        board = copy.deepcopy(passed_board)
         current_state = states[0][0] # Start both players at full health (recall states[0][0] is 20vs20 HP)
         while not current_state.terminal:
             my_action = np.argmax(current_state.q_old)
             if random.random() < epsilon:
                 my_action = random.randint(0, len(my_actions)-1)
             opp_action = random.randint(0, len(opp_actions)-1)
-            new_state = evalRound(players, [my_actions[my_action], opp_actions[opp_action]], states)
+            new_state = evalRound(board = board, players=players,
+                                  played_cards=[my_actions[my_action], opp_actions[opp_action]],
+                                  states=states)
             current_state.q_old[my_action] = current_state.q_old[my_action] \
                                              + alpha * (new_state.reward + gamma * np.amax(new_state.q_old) - current_state.q_old[my_action])
             current_state = new_state
-
-        # extractMax(states)
-        # diffs[episode] = getDiff(states)
     return states
 
 def plotValues(states):
@@ -123,7 +134,7 @@ def plotValues(states):
     for i in range(size_x):
         for j in range(size_y):
             vals[i][j] = np.amax(states[i][j].q_old)
-    cmap = plt.get_cmap()
+    cmap = plt.get_cmap('viridis')
     cmap.set_bad('black')
     masked_vals = np.ma.masked_equal(vals, 0.0)
     im = plt.imshow(masked_vals, interpolation = 'nearest', cmap=cmap)
@@ -139,9 +150,12 @@ def plotValues(states):
         for j in range(size_y):
             if vals[i][j] == 0.0:
                 continue # We haven't explored all actions in this state
-            plt.annotate(np.argmax(states[i][j].q_old), (j,i), color = 'red')
+            txt =plt.annotate(np.argmax(states[i][j].q_old), (j,i), color = 'white')
+            txt.set_path_effects([path_effects.Stroke(linewidth=3, foreground='black'),
+                                   path_effects.Normal()])
 
     plt.title("Best action and its value, from your perspective")
+    # plt.legend()
     # plt.tight_layout()
     fig = plt.gcf()
     # fig.savefig('gamma{}.jpg'.format(gamma), bbox_inches='tight')
@@ -155,14 +169,24 @@ card_trash = Card("Trash", range=1, attack=2, priority=1, defense=0)
 
 my_actions = [card_attack, card_defense]
 opp_actions = [card_priority, card_trash]
+
 health = 20
 luc = Luc(position=0, cards=my_actions, health=health)
 shekhtur = Shekhtur(position=1, cards=opp_actions, health=health)
 states = initStates(num_actions=2, max_health=health)
 
 players = [luc, shekhtur]
-states_after_QLearning = QLearning(states, players, gamma=1, alpha=0.1, epsilon=0.05, episodes=1000)
-for state_row in states_after_QLearning:
-    for state in state_row:
-        print(state)
-plotValues(states_after_QLearning)
+board = Board(players=players, positions=[2,4])
+# states_after_QLearning = QLearning(states, players, gamma=1, alpha=0.1, epsilon=0.05, episodes=100000)
+# for state_row in states_after_QLearning:
+#     for state in state_row:
+#         print(state)
+# plotValues(states_after_QLearning)
+
+card = Card("Attack", range=1, attack=2, priority=3, defense=0, before=[[board.moveCharacter, 1]])
+card.executeActions(action_name=card.before, players=players, active_player=1)
+# board.moveCharacter(to_move=1, active_player=0)
+# board.moveCharacter(to_move=-2, active_player=1)
+# board.moveCharacter(to_move=4, active_player=1)
+# board.moveCharacter(to_move=-1, active_player=1)
+print(board.positions)
