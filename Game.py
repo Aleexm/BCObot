@@ -14,6 +14,7 @@ import matplotlib.patheffects as path_effects
 from Strategy import Strategy
 from RandomStrategy import RandomStrategy
 from UserStrategy import UserStrategy
+from Pair import Pair
 
 def winner(p1, p2):
     '''
