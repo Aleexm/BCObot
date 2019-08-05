@@ -15,6 +15,7 @@ from Strategy import Strategy
 from RandomStrategy import RandomStrategy
 from UserStrategy import UserStrategy
 from Pair import Pair
+from Chrono import Chrono
 
 def winner(p1, p2):
     '''
@@ -166,6 +167,7 @@ def plotValues(states):
     plt.show()
 
 # Test stuff
+
 card_attack = Card("Attack", type=Card.Type.base, min_range=1, max_range=1, attack=2, priority=3, defense=0)
 card_defense = Card("Defense", type=Card.Type.base, min_range=1, max_range=1, attack=1, priority=0, defense=5)
 card_priority = Card("Priority", type=Card.Type.base, min_range=1, max_range=1, attack=1, priority=4, defense=0)
@@ -175,13 +177,24 @@ my_actions = [card_attack, card_defense]
 opp_actions = [card_priority, card_trash]
 
 health = 20
-luc = Luc(position=0, cards_hand=my_actions, strategy=UserStrategy(), health=health)
-shekhtur = Shekhtur(position=1, cards_hand=opp_actions, strategy=RandomStrategy(), health=health)
+luc = Luc(position=2, cards_hand=my_actions, strategy=UserStrategy(), health=health)
+shekhtur = Shekhtur(position=4, cards_hand=opp_actions, strategy=RandomStrategy(), health=health)
 states = initStates(num_actions=2, max_health=health)
 
 players = [luc, shekhtur]
 board = Board(players=players, positions=[2,4])
 
+for player in players:
+    print("{} position: {}".format(player.name, player.position))
+    if player.name == "Luc":
+        print("Time: {}".format(player.time_tokens))
+chrono = Chrono()
+print(chrono)
+chrono.executeActions(chrono.start, players=players, active_player=0)
+for player in players:
+    print("{} position: {}".format(player.name, player.position))
+    if player.name == "Luc":
+        print("Time: {}".format(player.time_tokens))
 
 # luc_chosen = luc.strategy.chooseOption(options={0: "Option A", 1: "Option B"})
 

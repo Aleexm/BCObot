@@ -21,7 +21,7 @@ class Character:
 
     def __repr__(self, additional_params):
         return "Character: {}, Health: {}, Energy: {}, Position: {}, cards: {}, {}".format(
-               self.name, self.health, self.energy, self.position, self.cards, additional_params)
+               self.name, self.health, self.energy, self.position, self.cards_hand, additional_params)
 
     # def choicePlayer(self, options):
 

@@ -6,7 +6,7 @@ class Board:
         self.players = players
         self.positions = positions
 
-    def moveCharacter(self, to_move, active_player):
+    def moveCharacter(self, to_move, players, active_player):
         '''
         Moves the active player x squares.
         Arguments:
@@ -28,3 +28,4 @@ class Board:
             new_position = self.positions[active_player] + to_move
             self.positions[active_player] = new_position
             self.players[active_player].position = new_position
+            players[active_player].position = new_position
