@@ -11,6 +11,9 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.pyplot import figure
 import matplotlib.patheffects as path_effects
+from Strategy import Strategy
+from RandomStrategy import RandomStrategy
+from UserStrategy import UserStrategy
 
 def winner(p1, p2):
     '''
@@ -54,7 +57,7 @@ def evalRound(board, players, played_cards, states):
 
         if not stunned[attacking_player_idx]:
             current_card.executeActions(current_card.before, players, active_player=attacking_player_idx) # BEFORE actions
-            if abs(players[attacking_player_idx].position - players[defending_player_idx].position) <= current_card.range: # Hit
+            if abs(np.diff(board.positions)[0]) <= current_card.range: # Hit
                 players[defending_player_idx].health = max(0, players[defending_player_idx].health - current_card.attack) # Clamp hp at 0
                 if played_cards[defending_player_idx].defense < current_card.attack:
                     stunned[defending_player_idx] = True # Stun Guard broken
@@ -162,31 +165,27 @@ def plotValues(states):
     plt.show()
 
 # Test stuff
-card_attack = Card("Attack", range=1, attack=2, priority=3, defense=0)
-card_defense = Card("Defense", range=1, attack=1, priority=0, defense=5)
-card_priority = Card("Priority", range=1, attack=1, priority=4, defense=0)
-card_trash = Card("Trash", range=1, attack=2, priority=1, defense=0)
+card_attack = Card("Attack", type=Card.Type.base, min_range=1, max_range=1, attack=2, priority=3, defense=0)
+card_defense = Card("Defense", type=Card.Type.base, min_range=1, max_range=1, attack=1, priority=0, defense=5)
+card_priority = Card("Priority", type=Card.Type.base, min_range=1, max_range=1, attack=1, priority=4, defense=0)
+card_trash = Card("Trash", type=Card.Type.base, min_range=1, max_range=1, attack=2, priority=1, defense=0)
 
 my_actions = [card_attack, card_defense]
 opp_actions = [card_priority, card_trash]
 
 health = 20
-luc = Luc(position=0, cards=my_actions, health=health)
-shekhtur = Shekhtur(position=1, cards=opp_actions, health=health)
+luc = Luc(position=0, cards_hand=my_actions, strategy=UserStrategy(), health=health)
+shekhtur = Shekhtur(position=1, cards_hand=opp_actions, strategy=RandomStrategy(), health=health)
 states = initStates(num_actions=2, max_health=health)
 
 players = [luc, shekhtur]
 board = Board(players=players, positions=[2,4])
+
+
+# luc_chosen = luc.strategy.chooseOption(options={0: "Option A", 1: "Option B"})
+
 # states_after_QLearning = QLearning(states, players, gamma=1, alpha=0.1, epsilon=0.05, episodes=100000)
 # for state_row in states_after_QLearning:
 #     for state in state_row:
 #         print(state)
 # plotValues(states_after_QLearning)
-
-card = Card("Attack", range=1, attack=2, priority=3, defense=0, before=[[board.moveCharacter, 1]])
-card.executeActions(action_name=card.before, players=players, active_player=1)
-# board.moveCharacter(to_move=1, active_player=0)
-# board.moveCharacter(to_move=-2, active_player=1)
-# board.moveCharacter(to_move=4, active_player=1)
-# board.moveCharacter(to_move=-1, active_player=1)
-print(board.positions)

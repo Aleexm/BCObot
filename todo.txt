@@ -1,0 +1,6 @@
+TODO:
+- clashes
+- EOT card effects
+- expand states with this positions
+- player movement choice
+- abstract strategies that fit into any evalRound

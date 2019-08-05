@@ -1,24 +1,20 @@
 from Board import Board
+from enum import Enum
+
 class Card:
 
-    name = None
-    range = None # TODO : Min/max range
-    attack = None
-    priority = None
-    defense = None
-    start = None
-    before = None
-    after = None
-
-    def __init__(self, name, range, attack, priority, defense, start = [], before = [], after = []):
+    def __init__(self, name, type, attack, priority, defense, min_range, max_range=None, start = [], before = [], after = [], end = []):
         self.name = name
-        self.range = range
+        self.type = self.Type(type)
+        self.min_range = min_range
+        self.max_range = min_range if max_range is None else max_range
         self.attack = attack
         self.priority = priority
         self.defense = defense
         self.start = start
         self.before = before
         self.after = after
+        self.end = end
 
     def __repr__(self):
         # return "{}: range: {}, attack: {}, priority: {}, defense: {}".format(self.name, self.range, self.attack, self.priority, self.defense)
@@ -31,12 +27,7 @@ class Card:
             method(*params, active_player)
             # action(active_player)
 
-    # def moveCharacter(to_move, players, active_player):
-
-
-
-
-
-
-
-# card = Card("Memento", 0, 0, 1, 0)
+    class Type(Enum):
+        base = 1
+        style = 2
+        finisher = 3
