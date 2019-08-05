@@ -1,4 +1,7 @@
 class Board:
+    '''
+    Deprecated?
+    '''
     players = None
     positions = None
 
