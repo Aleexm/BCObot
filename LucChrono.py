@@ -1,6 +1,6 @@
 from Card import Card
 
-class Chrono(Card):
+class LucChrono(Card):
     def __init__(self):
         super().__init__(name="Chrono", type=Card.Type.style, attack=0, priority=1, defense=0, min_range=0, start=[[self.start]])
 

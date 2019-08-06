@@ -15,7 +15,7 @@ from Strategy import Strategy
 from RandomStrategy import RandomStrategy
 from UserStrategy import UserStrategy
 from Pair import Pair
-from Chrono import Chrono
+from LucChrono import LucChrono
 
 def winner(p1, p2):
     '''
@@ -188,7 +188,7 @@ for player in players:
     print("{} position: {}".format(player.name, player.position))
     if player.name == "Luc":
         print("Time: {}".format(player.time_tokens))
-chrono = Chrono()
+chrono = LucChrono()
 print("Played card: {}".format(chrono))
 chrono.executeActions(chrono.start, players=players, active_player=0)
 for player in players:
