@@ -1,5 +1,4 @@
 from Card import Card
-from Board import Board
 
 class Chrono(Card):
     def __init__(self):
@@ -14,13 +13,13 @@ class Chrono(Card):
         enemy = players[1-active_player]
         time_tokens = luc.time_tokens
         if time_tokens == 0:
-            return
+            return # Can't advance
         possible_close = min(abs(luc.position - enemy.position) - 1, time_tokens, 3)
         if possible_close == 0:
-            return
+            return # Already next to enemy
         options = {}
         for i in range(1, possible_close+2):
-            options[i] = "Advance {}".format(i-1)
+            options[i] = "Advance {}".format(i-1) # User's options are 1 based because not everyone is a programmer... smh
         chosen_option = luc.strategy.chooseOption(options = options) - 1
         self.moveCharacter(to_move=chosen_option, players=players, active_player=active_player)
         luc.time_tokens -= chosen_option
