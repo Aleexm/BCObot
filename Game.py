@@ -189,7 +189,7 @@ for player in players:
     if player.name == "Luc":
         print("Time: {}".format(player.time_tokens))
 chrono = Chrono()
-print(chrono)
+print("Played card: {}".format(chrono))
 chrono.executeActions(chrono.start, players=players, active_player=0)
 for player in players:
     print("{} position: {}".format(player.name, player.position))

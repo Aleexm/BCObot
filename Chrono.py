@@ -9,9 +9,9 @@ class Chrono(Card):
         return super().__repr__()
 
     def start(self, players, active_player):
+        "Spend up to 3 Time Tokens to close that many spaces."
         luc = players[active_player]
         enemy = players[1-active_player]
-        "Spend up to 3 Time Tokens to close that many spaces."
         time_tokens = luc.time_tokens
         if time_tokens == 0:
             return
