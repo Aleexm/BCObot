@@ -21,5 +21,5 @@ class LucChrono(Card):
         for i in range(1, possible_close+2):
             options[i] = "Advance {}".format(i-1) # User's options are 1 based because not everyone is a programmer... smh
         chosen_option = luc.strategy.chooseOption(options = options) - 1
-        self.moveCharacter(to_move=chosen_option, players=players, active_player=active_player)
+        luc.moveCharacter(to_move=chosen_option, players=players, active_player=active_player)
         luc.time_tokens -= chosen_option

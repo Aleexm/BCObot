@@ -16,6 +16,8 @@ from RandomStrategy import RandomStrategy
 from UserStrategy import UserStrategy
 from Pair import Pair
 from LucChrono import LucChrono
+from LucFeinting import LucFeinting
+from LucFusion import LucFusion
 
 def winner(p1, p2):
     '''
@@ -183,18 +185,22 @@ states = initStates(num_actions=2, max_health=health)
 
 players = [luc, shekhtur]
 board = Board(players=players, positions=[2,4])
+test_card = LucFusion()
+test_card.executeActions(test_card.hit, players, 0)
+for player in players:
+	print(player.position, player.health)
 
-for player in players:
-    print("{} position: {}".format(player.name, player.position))
-    if player.name == "Luc":
-        print("Time: {}".format(player.time_tokens))
-chrono = LucChrono()
-print("Played card: {}".format(chrono))
-chrono.executeActions(chrono.start, players=players, active_player=0)
-for player in players:
-    print("{} position: {}".format(player.name, player.position))
-    if player.name == "Luc":
-        print("Time: {}".format(player.time_tokens))
+# for player in players:
+    # print("{} position: {}".format(player.name, player.position))
+    # if player.name == "Luc":
+        # print("Time: {}".format(player.time_tokens))
+# chrono = LucChrono()
+# print("Played card: {}".format(chrono))
+# chrono.executeActions(chrono.start, players=players, active_player=0)
+# for player in players:
+    # print("{} position: {}".format(player.name, player.position))
+    # if player.name == "Luc":
+        # print("Time: {}".format(player.time_tokens))
 
 # luc_chosen = luc.strategy.chooseOption(options={0: "Option A", 1: "Option B"})
 

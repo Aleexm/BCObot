@@ -14,7 +14,7 @@ class UserStrategy(Strategy):
         chosen = False
         chosen_option = None
         for key,val in options.items():
-            print("{}: {}".format(key, val))
+            print("{}: {}: {}".format(key, val[1], val[2]))
         while(not chosen):
             inp = input("Choose your move: ")
             try:
