@@ -15,6 +15,10 @@ from Strategy import Strategy
 from RandomStrategy import RandomStrategy
 from UserStrategy import UserStrategy
 from Pair import Pair
+from BaseStrike import BaseStrike
+from BaseShot import BaseShot
+from BaseDrive import BaseDrive
+from BaseBurst import BaseBurst
 from BaseGrasp import BaseGrasp
 from LucChrono import LucChrono
 from LucFeinting import LucFeinting
@@ -188,7 +192,7 @@ states = initStates(num_actions=2, max_health=health)
 
 players = [luc, shekhtur]
 board = Board(players=players, positions=[2,4])
-base = BaseGrasp()
+base = BaseDrive()
 style = LucFeinting()
 played_pair = Pair(base=base, style=style)
 played_pair.executeActions(played_pair.start, players, 0)
