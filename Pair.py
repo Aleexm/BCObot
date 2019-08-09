@@ -22,12 +22,12 @@ class Pair:
             self.min_range = base.min_range + style.min_range
             self.max_range = base.max_range + style.max_range
             self.soak = base.soak + style.soak
-            self.start = [item for sublist in [self.base.start, self.style.start] for item in sublist]
-            self.before = [item for sublist in [self.base.before, self.style.before] for item in sublist]
-            self.hit = [item for sublist in [self.base.hit, self.style.hit] for item in sublist]
-            self.on_hit = [item for sublist in [self.base.on_hit, self.style.on_hit] for item in sublist]
-            self.after = [item for sublist in [self.base.after, self.style.after] for item in sublist]
-            self.end = [item for sublist in [self.base.end, self.style.end] for item in sublist]
+            self.start = self.base.start + self.style.start
+            self.before = self.base.before + self.style.before
+            self.hit = self.base.hit + self.style.hit
+            self.on_hit = self.base.on_hit + self.style.on_hit
+            self.after = self.base.after + self.style.after
+            self.end = self.base.end + self.style.end
 
     # TODO: This can't really be in Pair as it's impossible to detect opposing "can't be moved" for example
     def executeActions(self, action_name, players, active_player):

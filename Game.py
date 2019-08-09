@@ -187,8 +187,8 @@ shekhtur = Shekhtur(position=4, cards_hand=opp_actions, strategy=RandomStrategy(
 
 players = [luc, shekhtur]
 board = Board(players=players, positions=[2,4])
-base = BaseDrive()
-style = LucFeinting()
+base = grasp
+style = fusion
 played_pair = Pair(base=base, style=style)
 active_player = 0
 played_pair.executeActions(played_pair.start, players, active_player)
