@@ -176,31 +176,27 @@ def plotValues(states):
     plt.show()
 
 # Test stuff
-
-card_attack = Card("Attack", type=Card.Type.base, min_range=1, max_range=1, attack=2, priority=3, defense=0)
-card_defense = Card("Defense", type=Card.Type.base, min_range=1, max_range=1, attack=1, priority=0, defense=5)
-card_priority = Card("Priority", type=Card.Type.base, min_range=1, max_range=1, attack=1, priority=4, defense=0)
-card_trash = Card("Trash", type=Card.Type.base, min_range=1, max_range=1, attack=2, priority=1, defense=0)
-
-my_actions = [card_attack, card_defense]
-opp_actions = [card_priority, card_trash]
+strike, drive, grasp, shot, burst = BaseStrike(), BaseDrive(), BaseGrasp(), BaseShot(), BaseBurst()
+chrono, feinting, fusion, memento, eternal = LucChrono(), LucFeinting(), LucFusion(), LucMemento(), LucEternal()
+my_actions = [strike,drive,grasp,chrono,feinting]
+opp_actions = [strike,drive,burst,fusion,memento]
 
 health = 20
 luc = Luc(position=2, cards_hand=my_actions, strategy=UserStrategy(), health=health)
 shekhtur = Shekhtur(position=4, cards_hand=opp_actions, strategy=RandomStrategy(), health=health)
-states = initStates(num_actions=2, max_health=health)
 
 players = [luc, shekhtur]
 board = Board(players=players, positions=[2,4])
 base = BaseDrive()
 style = LucFeinting()
 played_pair = Pair(base=base, style=style)
-played_pair.executeActions(played_pair.start, players, 0)
-played_pair.executeActions(played_pair.before, players, 0)
-played_pair.executeActions(played_pair.hit, players, 0)
-played_pair.executeActions(played_pair.on_hit, players, 0)
-played_pair.executeActions(played_pair.after, players, 0)
-played_pair.executeActions(played_pair.end, players, 0)
+active_player = 0
+played_pair.executeActions(played_pair.start, players, active_player)
+played_pair.executeActions(played_pair.before, players, active_player)
+played_pair.executeActions(played_pair.hit, players, active_player)
+played_pair.executeActions(played_pair.on_hit, players, active_player)
+played_pair.executeActions(played_pair.after, players, active_player)
+played_pair.executeActions(played_pair.end, players, active_player)
 shekhtur.health -= played_pair.attack
 for player in players:
 	print(player.position, player.health)

@@ -11,5 +11,5 @@ class RandomStrategy(Strategy):
         return super().__repr__()
 
     def chooseOption(self, options):
-        chosen_option = random.randint(0, len(options.keys())-1)
+        chosen_option = random.randint(1, len(options.keys()))
         return chosen_option
