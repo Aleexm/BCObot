@@ -28,6 +28,7 @@ class Pair:
             self.after = [item for sublist in [self.base.after, self.style.after] for item in sublist]
             self.end = [item for sublist in [self.base.end, self.style.end] for item in sublist]
 
+    # TODO: This can't really be in Pair as it's impossible to detect opposing "can't be moved" for example
     def executeActions(self, action_name, players, active_player):
         processed_cards = {}
         while True:
