@@ -3,6 +3,7 @@ from Card import Card
 class Pair:
 
     def __init__(self, base, style=None):
+        # TODO: Finisher is awkward rn
         self.base = base
         self.style = style
         if self.base.type == Card.Type.finisher:
@@ -35,9 +36,8 @@ class Pair:
             added = False
             card_options = []
             for action in action_name:
-                method = action
-                if method not in processed_cards.keys():
-                    options_to_add = method(players, active_player, self)
+                if action not in processed_cards.keys():
+                    options_to_add = action(players, active_player, self)
                     if options_to_add is not None:
                         added = True
                         card_options.append(options_to_add)
@@ -49,7 +49,10 @@ class Pair:
                 for option in option_list:
                     options[i] = option
                     i+=1
-            chosen_option = players[active_player].strategy.chooseOption(options)
-            method = options[chosen_option][0]
-            method(players, active_player, self, chosen_option=options[chosen_option][3])
-            processed_cards[method] = True
+            if len(options) == 1:
+                chosen_option = 1
+            else:
+                chosen_option = players[active_player].strategy.chooseOption(options)
+            action = options[chosen_option][0]
+            action(players, active_player, self, chosen_option=options[chosen_option][3])
+            processed_cards[action] = True

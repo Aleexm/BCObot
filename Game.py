@@ -189,7 +189,7 @@ states = initStates(num_actions=2, max_health=health)
 players = [luc, shekhtur]
 board = Board(players=players, positions=[2,4])
 base = BaseGrasp()
-style = LucMemento()
+style = LucFeinting()
 played_pair = Pair(base=base, style=style)
 played_pair.executeActions(played_pair.start, players, 0)
 played_pair.executeActions(played_pair.before, players, 0)
