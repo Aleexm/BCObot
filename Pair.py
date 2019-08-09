@@ -16,18 +16,9 @@ class Pair:
             assert self.style is not None, "Missing a Style."
             assert self.base.type == Card.Type.base, "Base is not actually a Base."
             assert self.style.type == Card.Type.style, "Style is not actually a Style"
-            self.attack = base.attack + style.attack
-            self.priority = base.priority + style.priority
-            self.defense = base.priority = style.priority
-            self.min_range = base.min_range + style.min_range
-            self.max_range = base.max_range + style.max_range
-            self.soak = base.soak + style.soak
-            self.start = self.base.start + self.style.start
-            self.before = self.base.before + self.style.before
-            self.hit = self.base.hit + self.style.hit
-            self.on_hit = self.base.on_hit + self.style.on_hit
-            self.after = self.base.after + self.style.after
-            self.end = self.base.end + self.style.end
+            properties_to_combine = ["attack", "priority", "defense", "min_range", "max_range", "soak", "start", "before", "hit", "on_hit", "after", "end"]
+            for property in properties_to_combine:
+                self.__dict__[property] = base.__dict__[property] + style.__dict__[property]
 
     # TODO: This can't really be in Pair as it's impossible to detect opposing "can't be moved" for example
     def executeActions(self, action_name, players, active_player):
