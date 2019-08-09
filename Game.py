@@ -15,9 +15,12 @@ from Strategy import Strategy
 from RandomStrategy import RandomStrategy
 from UserStrategy import UserStrategy
 from Pair import Pair
+from BaseGrasp import BaseGrasp
 from LucChrono import LucChrono
 from LucFeinting import LucFeinting
 from LucFusion import LucFusion
+from LucMemento import LucMemento
+from LucEternal import LucEternal
 
 def winner(p1, p2):
     '''
@@ -185,8 +188,16 @@ states = initStates(num_actions=2, max_health=health)
 
 players = [luc, shekhtur]
 board = Board(players=players, positions=[2,4])
-test_card = LucFusion()
-test_card.executeActions(test_card.hit, players, 0)
+base = BaseGrasp()
+style = LucMemento()
+played_pair = Pair(base=base, style=style)
+played_pair.executeActions(played_pair.start, players, 0)
+played_pair.executeActions(played_pair.before, players, 0)
+played_pair.executeActions(played_pair.hit, players, 0)
+played_pair.executeActions(played_pair.on_hit, players, 0)
+played_pair.executeActions(played_pair.after, players, 0)
+played_pair.executeActions(played_pair.end, players, 0)
+shekhtur.health -= played_pair.attack
 for player in players:
 	print(player.position, player.health)
 
