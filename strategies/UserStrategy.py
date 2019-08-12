@@ -1,4 +1,6 @@
-from Strategy import Strategy
+import sys
+sys.path.append("..")
+from .Strategy import Strategy
 
 class UserStrategy(Strategy):
     """Lets the user decide between all presented Options."""
@@ -19,7 +21,7 @@ class UserStrategy(Strategy):
 
         Returns:
             chosen_option (int):The dictionary key index which we have chosen.
-            
+
         """
         chosen = False
         chosen_option = None

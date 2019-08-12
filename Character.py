@@ -1,11 +1,11 @@
-from Strategy import Strategy
+from strategies.Strategy import Strategy
 from copy import deepcopy
 from Option import Option
 from Pair import Pair
 from collections import deque
-from AnteGuardUp import AnteGuardUp
-from AntePowerUp import AntePowerUp
-from AntePriorityUp import AntePriorityUp
+from default_antes.AnteGuardUp import AnteGuardUp
+from default_antes.AntePowerUp import AntePowerUp
+from default_antes.AntePriorityUp import AntePriorityUp
 from enum import Enum
 
 class Character:

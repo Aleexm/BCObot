@@ -1,11 +1,13 @@
+import sys
+sys.path.append("..")
 from Character import Character
-from LucChrono import LucChrono
-from LucFeinting import LucFeinting
-from LucFusion import LucFusion
-from LucMemento import LucMemento
-from LucEternal import LucEternal
-from LucTimeSurge import LucTimeSurge
-from LucTimeRush import LucTimeRush
+from .LucChrono import LucChrono
+from .LucFeinting import LucFeinting
+from .LucFusion import LucFusion
+from .LucMemento import LucMemento
+from .LucEternal import LucEternal
+from .LucTimeSurge import LucTimeSurge
+from .LucTimeRush import LucTimeRush
 # from LucTimeStop import LucTimeStop
 from Option import Option
 
@@ -38,7 +40,7 @@ class Luc(Character):
                               and as values True.
         Returns:
             possible_antes (list):List containing possible antes as Option.
-            
+
         """
         possible_antes = super().getDefaultAntes(used_antes)
         time_surge = LucTimeSurge()

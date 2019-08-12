@@ -1,3 +1,5 @@
+import sys
+sys.path.append("..")
 from Card import Card
 from Option import Option
 import numpy as np

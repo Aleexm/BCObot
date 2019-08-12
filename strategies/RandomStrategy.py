@@ -1,4 +1,6 @@
-from Strategy import Strategy
+import sys
+sys.path.append("..")
+from .Strategy import Strategy
 import random
 
 class RandomStrategy(Strategy):

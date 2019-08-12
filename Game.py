@@ -3,8 +3,8 @@ from State import State
 from Card import Card
 from Character import Character
 from Beat import Beat
-from Luc import Luc
-from Shekhtur import Shekhtur
+from luc.Luc import Luc
+from shekhtur.Shekhtur import Shekhtur
 import numpy as np
 import copy
 import random
@@ -12,15 +12,15 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib.pyplot import figure
 import matplotlib.patheffects as path_effects
-from Strategy import Strategy
-from RandomStrategy import RandomStrategy
-from UserStrategy import UserStrategy
+from strategies.Strategy import Strategy
+from strategies.RandomStrategy import RandomStrategy
+from strategies.UserStrategy import UserStrategy
 from Pair import Pair
-from BaseStrike import BaseStrike
-from BaseShot import BaseShot
-from BaseDrive import BaseDrive
-from BaseBurst import BaseBurst
-from BaseGrasp import BaseGrasp
+from default_cards.BaseStrike import BaseStrike
+from default_cards.BaseShot import BaseShot
+from default_cards.BaseDrive import BaseDrive
+from default_cards.BaseBurst import BaseBurst
+from default_cards.BaseGrasp import BaseGrasp
 
 
 def winner(players):

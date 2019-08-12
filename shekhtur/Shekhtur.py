@@ -1,3 +1,5 @@
+import sys
+sys.path.append("..")
 from Character import Character
 
 class Shekhtur(Character):

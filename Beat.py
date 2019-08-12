@@ -74,7 +74,7 @@ class Beat:
             action = options[chosen_option].function
             print(options[chosen_option].user_info)
             action(players, active_player, self.played_pairs[active_player], self.played_pairs[1-active_player], chosen_option=options[chosen_option].params)
-            processed_cards[action] = True
+            processed_actions[action] = True
 
     def execute(self, players):
         """ Executes a Beat, givenplayers (list): list containing [player1, player2]."""
@@ -101,7 +101,7 @@ class Beat:
             defending_pair = self.played_pairs[p2_idx]
             if not stunned[p1_idx] and p1.health > 0:
                 print("{} Before".format(p1_idx))
-                self.executeActions(attacking_pair.before, players, active_player=p1_idx) 
+                self.executeActions(attacking_pair.before, players, active_player=p1_idx)
                 self.executeActions(players[p1_idx].before, players, active_player=p1_idx)
                 position_difference = abs(np.diff([p1.position, p2.position]))
                 if position_difference >= attacking_pair.min_range and position_difference <= attacking_pair.max_range:
