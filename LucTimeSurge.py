@@ -8,5 +8,6 @@ class LucTimeSurge:
         return self.name
 
     def apply(self, beat, players, active_player):
+        """Increments the played pair's priority by 1."""
         players[active_player].time_tokens = max(players[active_player].time_tokens - 1, 0)
         beat.played_pairs[active_player].priority += 1

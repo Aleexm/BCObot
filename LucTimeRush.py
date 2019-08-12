@@ -1,6 +1,7 @@
 from Option import Option
 
 class LucTimeRush:
+    """Cost: 3 Time. Start: Advance up to 2."""
     def __init__(self):
         self.name = "Time Rush"
         self.user_info = "Cost: 3 Time. Start: Advance up to 2."
@@ -10,10 +11,12 @@ class LucTimeRush:
         return self.name
 
     def apply(self, beat, players, active_player):
+        """Adds the possiblity of advancing to the played pair, as that's when we'll decide."""
         players[active_player].time_tokens = max(players[active_player].time_tokens - 3, 0)
         beat.played_pairs[active_player].start.append(self.startAdvance)
 
     def startAdvance(self, players, active_player, my_pair, opp_pair, chosen_option=None):
+        """Either returns the possible advances as options ([Option]), or applies the chosen_option and advances."""
         p1 = players[active_player]
         if chosen_option is None:
             possible_moves = p1.getPossibleMoves([1,2], players, active_player)

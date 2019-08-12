@@ -2,7 +2,6 @@ class AnteGuardUp:
     def __init__(self):
         self.name = "Guard Up"
         self.user_info = "+2 Guard."
-        self.unique = True # Can only ante once
 
     def __repr__(self):
         return self.name

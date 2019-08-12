@@ -10,9 +10,7 @@ from LucTimeRush import LucTimeRush
 from Option import Option
 
 class Luc(Character):
-
-    time_tokens = None
-
+    """Subclass of Character. Contains all Luc-specific properties and methods, such as time tokens and his possible antes."""
     def __init__(self, position, bases_hand, styles_hand, strategy, health):
         self.time_tokens = 2
         super().__init__("Luc", health=health, position=position,
@@ -26,12 +24,22 @@ class Luc(Character):
         return LucChrono(), LucFeinting(), LucFusion(), LucMemento(), LucEternal()
 
     def gainTime(self, players, active_player, my_pair, opp_pair, chosen_option=None):
+        """Either returns gaining 1 Time as an Option, or increments Time."""
         if chosen_option is None:
             return [Option(name=self.name, user_info="Gain 1 Time.", params=1, function=self.gainTime)]
         else:
             self.time_tokens = min(self.time_tokens+1, 5)
 
     def getPossibleAntes(self, used_antes):
+        """Creates a list containing all possible antes for the current Luc.
+
+        Parameters:
+            used_antes (dict):Dictionary containing as keys the name of used antes this beat,
+                              and as values True.
+        Returns:
+            possible_antes (list):List containing possible antes as Option.
+            
+        """
         possible_antes = super().getDefaultAntes(used_antes)
         time_surge = LucTimeSurge()
         time_rush = LucTimeRush()

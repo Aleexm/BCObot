@@ -2,7 +2,6 @@ class AntePriorityUp:
     def __init__(self):
         self.name = "Priority Up"
         self.user_info = "+2 Priority."
-        self.unique = True # Can only ante once
 
     def __repr__(self):
         return self.name

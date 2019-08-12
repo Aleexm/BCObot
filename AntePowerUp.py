@@ -2,7 +2,6 @@ class AntePowerUp:
     def __init__(self):
         self.name = "Power Up"
         self.user_info = "+1 Power."
-        self.unique = True # Can only ante once
 
     def __repr__(self):
         return self.name

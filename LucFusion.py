@@ -14,6 +14,7 @@ class LucFusion(Card):
         return super().__repr__()
 
     def push(self, players, active_player, my_pair, opp_pair, chosen_option=None):
+        """Either returns the possible pushes as options ([Option]), or applies the chosen_option and pushes."""
         luc = players[active_player]
         p2 = players[1-active_player]
         if chosen_option is None:
@@ -28,6 +29,7 @@ class LucFusion(Card):
             p2.moveCharacter(chosen_option*-1, players, 1-active_player)
 
     def damage(self, players, active_player, my_pair, opp_pair, chosen_option=None):
+        """Either returns dealing 2 damage as Option, or applies the chosen_option and deals 2 damage."""
         if chosen_option is None:
             if players[1-active_player].position == 0 or players[1-active_player].position == 6:
                 options = []

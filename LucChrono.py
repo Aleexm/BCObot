@@ -2,8 +2,7 @@ from Card import Card
 from Option import Option
 
 class LucChrono(Card):
-    "Start: Spend up to 3 Time Tokens to close that many spaces."
-
+    """Start: Spend up to 3 Time Tokens to close that many spaces."""
     def __init__(self):
         super().__init__(name="Chrono", type=Card.Type.style, attack=0, priority=1, defense=0, min_range=0, start=[self.close])
 
@@ -11,6 +10,7 @@ class LucChrono(Card):
         return super().__repr__()
 
     def close(self, players, active_player, my_pair, opp_pair, chosen_option=None):
+        """Either returns the possible closes as options ([Option]), or applies the chosen_option and closes."""
         luc = players[active_player]
         enemy = players[1-active_player]
         if chosen_option is None:

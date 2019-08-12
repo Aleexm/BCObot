@@ -2,7 +2,7 @@ from Strategy import Strategy
 import random
 
 class RandomStrategy(Strategy):
-
+    """Chooses uniformly random between all presented Options."""
     def __init__(self):
         self.name = "Random"
         super().__init__(self)

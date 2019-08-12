@@ -1,5 +1,5 @@
 class Option:
-
+    """All choices a player can make are instances of this class."""
     def __init__(self, user_info, params=None, object=None, name="", function=None):
         self.function = function
         self.name = "({})".format(name)

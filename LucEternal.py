@@ -13,6 +13,7 @@ class LucEternal(Card):
         return super().__repr__()
 
     def onHitSoak(self, players, active_player, my_pair, opp_pair, chosen_option=None):
+        """Either returns the possible soaks as options ([Option]), or applies the chosen_option and soaks."""
         luc = players[active_player]
         if chosen_option is None:
             if luc.time_tokens > 0:

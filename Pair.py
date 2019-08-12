@@ -1,7 +1,7 @@
 from Card import Card
 
 class Pair:
-
+    """Combines a played Style and Base into a Pair."""
     def __init__(self, base, style=None):
         # TODO: Finisher is awkward rn
         self.base = base
@@ -15,5 +15,3 @@ class Pair:
 
     def __repr__(self):
         return "({}, {}): Prio: {}, Atk: {}, Def: {}, Range:({} {})".format(self.base, self.style, self.priority, self.attack, self.defense, self.min_range, self.max_range)
-
-    

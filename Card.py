@@ -11,7 +11,7 @@ class Card:
         self.priority = priority
         self.defense = defense
         self.soak = soak
-        self.start = start
+        self.start = start # Start, before etc are a list containing function objects to be executed in start, before phase.
         self.before = before
         self.hit = hit
         self.on_hit = on_hit

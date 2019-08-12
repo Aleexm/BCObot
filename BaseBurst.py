@@ -2,7 +2,7 @@ from Card import Card
 from Option import Option
 
 class BaseBurst(Card):
-    "Start: Retreat 1 or 2 spaces."
+    """Start: Retreat 1 or 2 spaces."""
     def __init__(self):
         super().__init__(name="Burst", type=Card.Type.base, attack=3, priority=1, defense=0, min_range=2, max_range=3, start=[self.startRetreat])
 
@@ -10,6 +10,7 @@ class BaseBurst(Card):
         return super().__repr__()
 
     def startRetreat(self, players, active_player, my_pair, opp_pair, chosen_option=None):
+        """Either returns the possible retreats as options ([Option]), or applies the chosen_option and retreats."""
         p1 = players[active_player]
         if chosen_option is None:
             possible_moves = p1.getPossibleMoves([-1,-2], players, active_player)
