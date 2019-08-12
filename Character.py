@@ -1,30 +1,54 @@
 from Strategy import Strategy
 from copy import deepcopy
+from Option import Option
+from Pair import Pair
+from collections import deque
+from AnteGuardUp import AnteGuardUp
+from AntePowerUp import AntePowerUp
+from AntePriorityUp import AntePriorityUp
+from enum import Enum
 
 class Character:
-
-    name = None
-    health = None
-    energy = None
-    position = None
-    cards_hand = None
-    cards_discard = None
-    strategy = None
-
-    def __init__(self, name, health, energy, position, strategy, cards_hand, cards_discard=None):
+    """Contains all properties a Fighter in BCO has, such as his health, position, as well as Character-based functionality, such as moving and playing a Pair."""
+    def __init__(self, name, health, position, strategy, bases_hand=None, styles_hand=None, pairs_discard=None, force=2, start=[], before=[], hit=[], on_hit=[], after=[], end=[]):
         self.name = name
         self.health = health
-        self.energy = energy
         self.position = position
-        self.cards_hand = cards_hand
-        self.cards_discard = cards_discard
+        self.bases_hand = list(bases_hand)
+        self.styles_hand = list(styles_hand)
+        self.pairs_discard = deque([]) if pairs_discard is None else deque(pairs_discard)
         self.strategy = strategy
+        self.force = force
+        self.start = start
+        self.before = before
+        self.hit = hit
+        self.on_hit = on_hit
+        self.after = after
+        self.end = [self.gainForce] + end
+        self.static_effects = {}
 
     def __repr__(self, additional_params):
-        return "Character: {}, Health: {}, Energy: {}, Position: {}, cards: {}, {}".format(
-               self.name, self.health, self.energy, self.position, self.cards_hand, additional_params)
+        return "Character: {}, Health: {}, Position: {}, Force: {}, discard: {}, {}".format(
+        self.name, self.health, self.position, self.force, self.pairs_discard, additional_params)
+
+    class StaticEffects(Enum):
+        cant_be_moved = 1
+        cant_move = 2
+        ignore_stun_guard = 3
+        stun_immunity = 4
+
 
     def getPossibleMoves(self, moves_list, players, active_player):
+        """ Returns a list of all moves for a character, based on his possible moves.
+
+        Parameters:
+            moves_list (list):The list of possible moves, i.e. [1,2] for Advance 1 or 2.
+            players (list): list containing [player1, player2].
+            active_player (int): 0 or 1, resembling which entry in players is moving.
+        Returns:
+            possible_moves(list):The list of possible moves for this character.
+
+        """
         p1 = self
         p2 = players[1-active_player]
         possible_moves = []
@@ -40,15 +64,16 @@ class Character:
             if p1.position + to_move <= 6 and p1.position + to_move >= 0:
                 possible_moves.append(move)
         return possible_moves
-        
+
     def moveCharacter(self, to_move, players, active_player):
-        '''
-        Moves the active player x squares.
-        Arguments:
-            to_move: (int) number of steps to move. (initially) Positive for advance, negative for retreat.
-            players: (list of class Character) [p1, p2].
-            active_player: (int) the active player who will be moving, 0 or 1.
-        '''
+        """ Moves the active player to_move squares.
+
+        Parameters:
+            to_move (int): The number of steps to move. (initially) Positive for advance, negative for retreat.
+            players (list): list containing [player1, player2].
+            active_player (int): 0 or 1, resembling which entry in players is moving.
+
+        """
         p1 = players[active_player]
         p2 = players[1-active_player]
         advance = True if to_move > 0 else False
@@ -59,14 +84,92 @@ class Character:
             # You are moving past the opponent, increment move by 1.
             to_move = to_move+1 if to_move > 0 else to_move-1
         if  p1.position + to_move > 6 or p1.position + to_move < 0:
-            # Out of bounds
+            # Out of bounds:  This should never happen, out of bounds should be caught outside of this method
             print("can't move...")
-        else:
-            # We can move!
+        else: # We can move!
             new_position = p1.position + to_move
             p1.position = new_position
-            
-    # def choicePlayer(self, options):
 
+    def getDefaultAntes(self, used_antes):
+        """ Returns the three basic antes as Options, given that they have not yet been anted.
 
-    # def openingHand(self, cards_hand):
+        Parameters:
+            used_antes (dict):Dictionary containing as keys the names of used antes and as values True.
+
+        Returns:
+            options (list):List containing all possible basic antes.
+
+        """
+        options = []
+        if self.force < 2: # Can't ante anything
+            return options
+        else:
+            power, prio, guard = AntePowerUp(), AntePriorityUp(), AnteGuardUp()
+            default_antes = [power, prio, guard]
+            for ante in default_antes:
+                if ante.name not in used_antes.keys(): # We have not yet anted this ante.
+                    options.append(Option(name=ante.name, user_info=ante.user_info, object=ante))
+            return options
+
+    def gainForce(self, players, active_player, my_pair, opp_pair, chosen_option=None):
+        """ Increments players' force at the end of turn.
+
+        Parameters:
+            players (list):list containing [player1, player2].
+            active_player (int):0 or 1, resembling which entry in players is gaining Force.
+            my_pair (Pair):active_player's played Pair.
+            opp_pair (Pair):other player's played Pair.
+            chosen_option (int):Integer reflecting the updated force of this character.
+
+        """
+        if chosen_option is None:
+            return [Option(name=self.name, user_info="Gain Force.", params= min(self.force + (2-int((self.health-1)/10)), 10), function=self.gainForce)]
+        else:
+            self.force = chosen_option
+
+    def choosePair(self, action_name="play"):
+        """ Choose a Pair consisting of a Base and Style from all cards in hand.
+
+        Parameters:
+            action_name (str):String containing user information to be shown if applicable in its strategy.
+
+        Returns:
+            Pair (Pair):The chosen Pair consisting of a Base and Style.
+
+        """
+        base_options = {}
+        for i,base in enumerate(self.bases_hand):
+            base_options[i+1] = Option(name=action_name, user_info = base.name, params=i)
+        style_options = {}
+        for i,style in enumerate(self.styles_hand):
+            style_options[i+1] = Option(name=action_name, user_info = style.name, params=i)
+        chosen_option = self.strategy.chooseOption(base_options, header="Choose a base to {}".format(action_name))
+        chosen_base = base_options[chosen_option].params
+        chosen_option = self.strategy.chooseOption(style_options, header="Choose a style to {}".format(action_name))
+        chosen_style = style_options[chosen_option].params
+        return Pair(self.bases_hand[chosen_base], self.styles_hand[chosen_style])
+
+    def initHand(self):
+        """Discards two Pairs from your hand and adds them to your discard queue."""
+        for discards in range(2):
+            chosen_pair = self.choosePair(action_name="discard")
+            self.pairs_discard.append(chosen_pair)
+            self.bases_hand.remove(chosen_pair.base)
+            self.styles_hand.remove(chosen_pair.style)
+
+    def playPair(self):
+        """ Chooses a Pair, then enqueues that Pair in the pairs_discard queue,
+        and adds the first Pair in line in pairs_discard to hand.
+
+        Returns:
+            played_pair (Pair):The Pair that will be played.
+
+        """
+        played_pair = self.choosePair()
+        pair_to_hand = self.pairs_discard.popleft()
+        self.bases_hand.append(pair_to_hand.base)
+        self.styles_hand.append(pair_to_hand.style)
+        self.bases_hand.remove(played_pair.base)
+        self.styles_hand.remove(played_pair.style)
+        self.pairs_discard.append(played_pair)
+        return played_pair

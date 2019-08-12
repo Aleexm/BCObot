@@ -1,7 +1,7 @@
 TODO:
 - clashes
-- Bases
+- ante
+- Dodge
 - Shekhtur Styles
 - Refactor Pair
 - Refactor executeActions probably
-- Dodge

@@ -10,6 +10,6 @@ class RandomStrategy(Strategy):
     def __repr__(self):
         return super().__repr__()
 
-    def chooseOption(self, options):
+    def chooseOption(self, options, header=None):
         chosen_option = random.randint(1, len(options.keys()))
         return chosen_option

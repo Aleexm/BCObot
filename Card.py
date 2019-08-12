@@ -1,4 +1,3 @@
-from Board import Board
 from enum import Enum
 
 class Card:
@@ -20,8 +19,8 @@ class Card:
         self.end = end
 
     def __repr__(self):
-        return "{}: range: ({},{}), attack: {}, priority: {}, defense: {}".format(self.name, self.min_range, self.max_range, self.attack, self.priority, self.defense)
-        # return self.name
+        # return "{}: range: ({},{}), attack: {}, priority: {}, defense: {}".format(self.name, self.min_range, self.max_range, self.attack, self.priority, self.defense)
+        return self.name
 
     class Type(Enum):
         base = 1

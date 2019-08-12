@@ -1,0 +1,12 @@
+class AntePriorityUp:
+    def __init__(self):
+        self.name = "Priority Up"
+        self.user_info = "+2 Priority."
+        self.unique = True # Can only ante once
+
+    def __repr__(self):
+        return self.name
+
+    def apply(self, beat, players, active_player):
+        players[active_player].force = max(players[active_player].force - 2, 0)
+        beat.played_pairs[active_player].priority += 2

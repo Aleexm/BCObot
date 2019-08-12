@@ -1,4 +1,5 @@
 from Card import Card
+from Option import Option
 
 class BaseStrike(Card):
     def __init__(self):

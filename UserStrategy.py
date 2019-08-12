@@ -10,11 +10,13 @@ class UserStrategy(Strategy):
     def __repr__(self):
         return super().__repr__()
 
-    def chooseOption(self, options):
+    def chooseOption(self, options, header=None):
         chosen = False
         chosen_option = None
+        if header is not None:
+            print(header)
         for key,val in options.items():
-            print("{}: {}: {}".format(key, val[1], val[2]))
+            print("{}: {}: {}".format(key, val.name, val.user_info))
         while(not chosen):
             inp = input("Choose your move: ")
             try:

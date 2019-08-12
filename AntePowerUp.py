@@ -1,0 +1,12 @@
+class AntePowerUp:
+    def __init__(self):
+        self.name = "Power Up"
+        self.user_info = "+1 Power."
+        self.unique = True # Can only ante once
+
+    def __repr__(self):
+        return self.name
+
+    def apply(self, beat, players, active_player):
+        players[active_player].force = max(players[active_player].force - 2, 0)
+        beat.played_pairs[active_player].attack += 1

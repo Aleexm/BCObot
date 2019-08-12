@@ -1,7 +1,8 @@
+from copy import deepcopy
 from State import State
 from Card import Card
-from Board import Board
 from Character import Character
+from Beat import Beat
 from Luc import Luc
 from Shekhtur import Shekhtur
 import numpy as np
@@ -20,13 +21,9 @@ from BaseShot import BaseShot
 from BaseDrive import BaseDrive
 from BaseBurst import BaseBurst
 from BaseGrasp import BaseGrasp
-from LucChrono import LucChrono
-from LucFeinting import LucFeinting
-from LucFusion import LucFusion
-from LucMemento import LucMemento
-from LucEternal import LucEternal
 
-def winner(p1, p2):
+
+def winner(players):
     '''
     Checks whether the game has terminated, and returns the correspondin player if it did.
     Returns False if no winner yet, None if draw (probably change this later as it's kinda weird)
@@ -34,14 +31,12 @@ def winner(p1, p2):
         p1: Character 1, you
         p2: Character 2, opponent
     '''
-    if p1.health <= 0 and p2.health > 0:
-        return p2
-    elif p2.health <= 0 and p1.health > 0:
-        return p1
-    elif p1.health <= 0 and p2.health <= 0:
-        return None
+    if players[1].health <= 0 and players[0].health > 0:
+        return 0
+    elif players[0].health <= 0 and players[1].health > 0:
+        return 1
     else:
-        return False
+        return None
 
 def evalRound(board, players, played_cards, states):
     '''
@@ -176,47 +171,29 @@ def plotValues(states):
     plt.show()
 
 # Test stuff
+wins = np.zeros(2)
 strike, drive, grasp, shot, burst = BaseStrike(), BaseDrive(), BaseGrasp(), BaseShot(), BaseBurst()
-chrono, feinting, fusion, memento, eternal = LucChrono(), LucFeinting(), LucFusion(), LucMemento(), LucEternal()
-my_actions = [strike,drive,grasp,chrono,feinting]
-opp_actions = [strike,drive,burst,fusion,memento]
+chrono, feinting, fusion, memento, eternal = Luc.createCards()
+my_bases = [strike, drive, grasp, shot, burst]
+my_styles = [feinting, memento, eternal, chrono, fusion]
 
 health = 20
-luc = Luc(position=2, cards_hand=my_actions, strategy=UserStrategy(), health=health)
-shekhtur = Shekhtur(position=4, cards_hand=opp_actions, strategy=RandomStrategy(), health=health)
+for i in range(1):
+    print(i)
+    luc = Luc(position=2, bases_hand=my_bases, styles_hand=my_styles, strategy=RandomStrategy(), health=health)
+    shekhtur = Luc(position=4, bases_hand=my_bases, styles_hand=my_styles, strategy=RandomStrategy(), health=health)
+    luc.initHand()
+    shekhtur.initHand()
+    players = [luc, shekhtur]
 
-players = [luc, shekhtur]
-board = Board(players=players, positions=[2,4])
-base = grasp
-style = fusion
-played_pair = Pair(base=base, style=style)
-active_player = 0
-played_pair.executeActions(played_pair.start, players, active_player)
-played_pair.executeActions(played_pair.before, players, active_player)
-played_pair.executeActions(played_pair.hit, players, active_player)
-played_pair.executeActions(played_pair.on_hit, players, active_player)
-played_pair.executeActions(played_pair.after, players, active_player)
-played_pair.executeActions(played_pair.end, players, active_player)
-shekhtur.health -= played_pair.attack
-for player in players:
-	print(player.position, player.health)
+    while winner(players) is None:
+        beat = Beat(played_pairs = [luc.playPair(), shekhtur.playPair()])
+        beat.execute(players)
+    wins[winner(players)] +=1
 
+print(wins)
+
+# shekhtur.health -= played_pair.attack
 # for player in players:
-    # print("{} position: {}".format(player.name, player.position))
-    # if player.name == "Luc":
-        # print("Time: {}".format(player.time_tokens))
-# chrono = LucChrono()
-# print("Played card: {}".format(chrono))
-# chrono.executeActions(chrono.start, players=players, active_player=0)
-# for player in players:
-    # print("{} position: {}".format(player.name, player.position))
-    # if player.name == "Luc":
-        # print("Time: {}".format(player.time_tokens))
-
-# luc_chosen = luc.strategy.chooseOption(options={0: "Option A", 1: "Option B"})
-
-# states_after_QLearning = QLearning(states, players, gamma=1, alpha=0.1, epsilon=0.05, episodes=100000)
-# for state_row in states_after_QLearning:
-#     for state in state_row:
-#         print(state)
-# plotValues(states_after_QLearning)
+#     print(player.health)
+#     print(player.name, player.pairs_discard)
