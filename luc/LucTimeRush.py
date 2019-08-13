@@ -12,9 +12,11 @@ class LucTimeRush:
     def __repr__(self):
         return self.name
 
+    def payCost(self, beat, players, active_player):
+        players[active_player].time_tokens = max(players[active_player].time_tokens - 3, 0)
+
     def apply(self, beat, players, active_player):
         """Adds the possiblity of advancing to the played pair, as that's when we'll decide."""
-        players[active_player].time_tokens = max(players[active_player].time_tokens - 3, 0)
         beat.played_pairs[active_player].start.append(self.startAdvance)
 
     def startAdvance(self, players, active_player, my_pair, opp_pair, chosen_option=None):
@@ -24,9 +26,11 @@ class LucTimeRush:
             possible_moves = p1.getPossibleMoves([1,2], players, active_player)
             if len(possible_moves) > 0:
                 options = []
+                options.append(Option(name=self.name, user_info="Do not Advance.", params=0, function=self.startAdvance))
                 for move in possible_moves:
                     options.append(Option(name=self.name, user_info="Advance {}".format(move), params=move, function=self.startAdvance))
                 return options
             return None
         else:
-            p1.moveCharacter(chosen_option, players, active_player)
+            if chosen_option != 0:
+                p1.moveCharacter(chosen_option, players, active_player)

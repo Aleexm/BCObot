@@ -37,7 +37,6 @@ class Character:
         ignore_stun_guard = 3
         stun_immunity = 4
 
-
     def getPossibleMoves(self, moves_list, players, active_player):
         """ Returns a list of all moves for a character, based on his possible moves.
 
@@ -127,7 +126,7 @@ class Character:
         else:
             self.force = chosen_option
 
-    def choosePair(self, action_name="play"):
+    def choosePair(self, bases_hand, styles_hand, action_name="play"):
         """ Choose a Pair consisting of a Base and Style from all cards in hand.
 
         Parameters:
@@ -135,41 +134,56 @@ class Character:
 
         Returns:
             Pair (Pair):The chosen Pair consisting of a Base and Style.
+            bases_hand (list of Card):Bases in hand (not the same as self.bases, as clashes happen).
+            styles_hand (list of Card):Styles in hand.
 
         """
         base_options = {}
-        for i,base in enumerate(self.bases_hand):
+        for i,base in enumerate(bases_hand):
             base_options[i+1] = Option(name=action_name, user_info = base.name, params=i)
         style_options = {}
-        for i,style in enumerate(self.styles_hand):
+        for i,style in enumerate(styles_hand):
             style_options[i+1] = Option(name=action_name, user_info = style.name, params=i)
         chosen_option = self.strategy.chooseOption(base_options, header="Choose a base to {}".format(action_name))
         chosen_base = base_options[chosen_option].params
         chosen_option = self.strategy.chooseOption(style_options, header="Choose a style to {}".format(action_name))
         chosen_style = style_options[chosen_option].params
-        return Pair(self.bases_hand[chosen_base], self.styles_hand[chosen_style])
+        return Pair(bases_hand[chosen_base], styles_hand[chosen_style])
 
-    def initHand(self):
-        """Discards two Pairs from your hand and adds them to your discard queue."""
-        for discards in range(2):
-            chosen_pair = self.choosePair(action_name="discard")
-            self.pairs_discard.append(chosen_pair)
-            self.bases_hand.remove(chosen_pair.base)
-            self.styles_hand.remove(chosen_pair.style)
-
-    def playPair(self):
-        """ Chooses a Pair, then enqueues that Pair in the pairs_discard queue,
+    def playPair(self, pair_to_play):
+        """ Enqueues the Pair in the pairs_discard queue,
         and adds the first Pair in line in pairs_discard to hand.
 
-        Returns:
-            played_pair (Pair):The Pair that will be played.
-
+        Parameters:
+            pair_to_play (Pair):The pair that will be played.
         """
-        played_pair = self.choosePair()
+        played_pair = self.choosePair(bases_hand=self.bases_hand, styles_hand=self.styles_hand)
         pair_to_hand = self.pairs_discard.popleft()
         self.bases_hand.append(pair_to_hand.base)
         self.styles_hand.append(pair_to_hand.style)
         self.bases_hand.remove(played_pair.base)
         self.styles_hand.remove(played_pair.style)
         self.pairs_discard.append(played_pair)
-        return played_pair
+
+    def initHand(self):
+        """Discards two Pairs from your hand and adds them to your discard queue."""
+        for discards in range(2):
+            chosen_pair = self.choosePair(bases_hand=self.bases_hand, styles_hand=self.styles_hand, action_name="discard")
+            self.pairs_discard.append(chosen_pair)
+            self.bases_hand.remove(chosen_pair.base)
+            self.styles_hand.remove(chosen_pair.style)
+
+    def testInitHand(self, x):
+        """Discards two Pairs from your hand and adds them to your discard queue."""
+        bases_hand_1 = [self.bases_hand[0-x]]
+        styles_hand_1 = [self.styles_hand[0-x]]
+        bases_hand_2 = [self.bases_hand[1-x]]
+        styles_hand_2 = [self.styles_hand[1-x]]
+        for discards in range(2):
+            if discards == 0:
+                chosen_pair = self.choosePair(bases_hand=bases_hand_1, styles_hand=styles_hand_1, action_name="discard")
+            else:
+                chosen_pair = self.choosePair(bases_hand=bases_hand_2, styles_hand=styles_hand_2, action_name="discard")
+            self.pairs_discard.append(chosen_pair)
+            self.bases_hand.remove(chosen_pair.base)
+            self.styles_hand.remove(chosen_pair.style)

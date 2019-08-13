@@ -178,22 +178,22 @@ my_bases = [strike, drive, grasp, shot, burst]
 my_styles = [feinting, memento, eternal, chrono, fusion]
 
 health = 20
-for i in range(1):
-    print(i)
+for i in range(10000):
+    if i%1000 == 0:
+        print(i)
     luc = Luc(position=2, bases_hand=my_bases, styles_hand=my_styles, strategy=RandomStrategy(), health=health)
     shekhtur = Luc(position=4, bases_hand=my_bases, styles_hand=my_styles, strategy=RandomStrategy(), health=health)
     luc.initHand()
     shekhtur.initHand()
     players = [luc, shekhtur]
 
+    round = 1
     while winner(players) is None:
-        beat = Beat(played_pairs = [luc.playPair(), shekhtur.playPair()])
+        luc_pair = luc.choosePair(luc.bases_hand, luc.styles_hand)
+        shekhtur_pair = shekhtur.choosePair(shekhtur.bases_hand, shekhtur.styles_hand)
+        beat = Beat(round=round, played_pairs = [luc_pair, shekhtur_pair])
         beat.execute(players)
+        round+=1
     wins[winner(players)] +=1
 
 print(wins)
-
-# shekhtur.health -= played_pair.attack
-# for player in players:
-#     print(player.health)
-#     print(player.name, player.pairs_discard)
