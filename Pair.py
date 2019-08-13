@@ -14,4 +14,4 @@ class Pair:
             self.__dict__[property] = base.__dict__[property] + style.__dict__[property]
 
     def __repr__(self):
-        return "({}, {}): Prio: {}, Atk: {}, Def: {}, Range:({} {})".format(self.base, self.style, self.priority, self.attack, self.defense, self.min_range, self.max_range)
+        return "({}, {}): Range:({}, {}), Atk: {}, Prio: {}, Def: {}".format(self.style, self.base, self.min_range, self.max_range, self.attack, self.priority, self.defense)

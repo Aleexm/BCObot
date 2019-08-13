@@ -122,20 +122,21 @@ class Character:
 
         """
         if chosen_option is None:
-            return [Option(name=self.name, user_info="Gain Force.", params= min(self.force + (2-int((self.health-1)/10)), 10), function=self.gainForce)]
+            return [Option(name=self.name, user_info="Gain Force.", params= 0, function=self.gainForce)]
         else:
-            self.force = chosen_option
+            force_to_gain = 2 if self.health <= 7 else 1
+            self.force = min(self.force + force_to_gain, 10)
 
     def choosePair(self, bases_hand, styles_hand, action_name="play"):
         """ Choose a Pair consisting of a Base and Style from all cards in hand.
 
         Parameters:
+            bases_hand (list of Card):Bases in hand (not the same as self.bases, as clashes happen).
+            styles_hand (list of Card):Styles in hand.
             action_name (str):String containing user information to be shown if applicable in its strategy.
 
         Returns:
             Pair (Pair):The chosen Pair consisting of a Base and Style.
-            bases_hand (list of Card):Bases in hand (not the same as self.bases, as clashes happen).
-            styles_hand (list of Card):Styles in hand.
 
         """
         base_options = {}
@@ -150,6 +151,24 @@ class Character:
         chosen_style = style_options[chosen_option].params
         return Pair(bases_hand[chosen_base], styles_hand[chosen_style])
 
+    def chooseBase(self, bases_hand, action_name="play"):
+        """ Choose a Base from all bases in hand.
+
+        Parameters:
+            bases_hand (list of Card):Bases in hand (not the same as self.bases, as clashes happen).
+            action_name (str):String containing user information to be shown if applicable in its strategy.
+
+        Returns:
+            base (Card):The chosen Base.
+
+        """
+        base_options = {}
+        for i,base in enumerate(bases_hand):
+            base_options[i+1] = Option(name=action_name, user_info = base.name, params=i)
+        chosen_option = self.strategy.chooseOption(base_options, header="Choose a base to {}".format(action_name))
+        chosen_base = base_options[chosen_option].params
+        return bases_hand[chosen_base]
+
     def playPair(self, pair_to_play):
         """ Enqueues the Pair in the pairs_discard queue,
         and adds the first Pair in line in pairs_discard to hand.
@@ -157,13 +176,13 @@ class Character:
         Parameters:
             pair_to_play (Pair):The pair that will be played.
         """
-        played_pair = self.choosePair(bases_hand=self.bases_hand, styles_hand=self.styles_hand)
         pair_to_hand = self.pairs_discard.popleft()
         self.bases_hand.append(pair_to_hand.base)
         self.styles_hand.append(pair_to_hand.style)
-        self.bases_hand.remove(played_pair.base)
-        self.styles_hand.remove(played_pair.style)
-        self.pairs_discard.append(played_pair)
+        # Remove played pair from cards in hand
+        self.bases_hand = [card for card in self.bases_hand if card.name != pair_to_play.base.name]
+        self.styles_hand = [card for card in self.styles_hand if card.name != pair_to_play.style.name]
+        self.pairs_discard.append(pair_to_play)
 
     def initHand(self):
         """Discards two Pairs from your hand and adds them to your discard queue."""
