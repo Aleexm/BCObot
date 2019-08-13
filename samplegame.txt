@@ -1,207 +1,329 @@
 
 C:\Users\alexm\Python tests\bot\BCObot>python Game.py
-Character: Luc, Health: 20, Position: 2, Force: 2, discard: deque([(Fusion, Shot): Range:(1, 4), Atk: 3, Prio: 3, Def: 2, (Chrono, Burst): Range:(2, 3), Atk: 3, Prio: 2, Def: 0]), Time: 2
-Character: Luc, Health: 20, Position: 4, Force: 2, discard: deque([(Fusion, Strike): Range:(1, 1), Atk: 4, Prio: 4, Def: 5, (Chrono, Shot): Range:(1, 4), Atk: 3, Prio: 3, Def: 2]), Time: 2
-1 (Time Surge) Cost: 1 Time. +1 Priority.
-0 (Priority Up) +2 Priority.
+Character: Luc, Health: 20, Position: 2, Force: 2, discard: deque([(Fusion, Drive): Range:(1, 1), Atk: 3, Prio: 5, Def: 0, (Chrono, Strike): Range:(1, 1), Atk: 4, Prio: 4, Def: 5]), Time: 2
+Character: Luc, Health: 20, Position: 4, Force: 2, discard: deque([(Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 0, Def: 2, (Fusion, Burst): Range:(2, 3), Atk: 3, Prio: 2, Def: 0]), Time: 2
 1 (Guard Up) +2 Guard.
+0 (Power Up) +1 Power.
+1 (Time Surge) Cost: 1 Time. +1 Priority.
 0 (Time Surge) Cost: 1 Time. +1 Priority.
 1 Pass
 0 Pass
-[(Memento, Strike): Range:(1, 1), Atk: 4, Prio: 7, Def: 5, (Feinting, Burst): Range:(3, 4), Atk: 4, Prio: 0, Def: 2]
+[(Memento, Grasp): Range:(1, 1), Atk: 3, Prio: 7, Def: 0, (Eternal, Strike): Range:(1, 1), Atk: 4, Prio: 0, Def: 7]
 0
 0 Start
 1 Start
-(Burst) Retreat 1
-(Feinting) Retreat 1
 0 Before
 0 After
+1 Before
+1 After
+0 End
+1 End
+Closing
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+Character: Luc, Health: 20, Position: 2, Force: 1, discard: deque([(Chrono, Strike): Range:(1, 1), Atk: 4, Prio: 4, Def: 5, (Memento, Grasp): Range:(1, 1), Atk: 3, Prio: 7, Def: 0]), Time: 2
+Character: Luc, Health: 20, Position: 4, Force: 1, discard: deque([(Fusion, Burst): Range:(2, 3), Atk: 3, Prio: 2, Def: 0, (Eternal, Strike): Range:(1, 1), Atk: 4, Prio: 0, Def: 7]), Time: 2
+1 Pass
+0 Pass
+[(Eternal, Burst): Range:(2, 3), Atk: 3, Prio: -3, Def: 0, (Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 0, Def: 2]
+1
+1 Start
+(Feinting) Retreat 1
+0 Start
+(Burst) Retreat 2
 1 Before
 1 Hit
 0 On_Hit
-Damage to 0: 4
+(Eternal) Spend 2 Time Tokens for Soak 2.
+Damage to 0: 1
 1 After
-0 End
-1 End
-(Feinting) Advance 1.
-Closing
-(Luc) Gain Force.
-(Luc) Gain 1 Time.
-(Luc) Gain 1 Time.
-(Luc) Gain Force.
-Character: Luc, Health: 16, Position: 2, Force: 1, discard: deque([(Chrono, Burst): Range:(2, 3), Atk: 3, Prio: 2, Def: 0, (Memento, Strike): Range:(1, 1), Atk: 4, Prio: 7, Def: 5]), Time: 2
-Character: Luc, Health: 20, Position: 5, Force: 1, discard: deque([(Chrono, Shot): Range:(1, 4), Atk: 3, Prio: 3, Def: 2, (Feinting, Burst): Range:(3, 4), Atk: 4, Prio: 0, Def: 2]), Time: 2
-1 (Time Surge) Cost: 1 Time. +1 Priority.
-0 (Time Surge) Cost: 1 Time. +1 Priority.
-1 Pass
-0 Pass
-[(Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 1, Def: 2, (Memento, Grasp): Range:(1, 1), Atk: 2, Prio: 7, Def: 0]
-1
-1 Start
-0 Start
-(Feinting) Retreat 1
-1 Before
-1 After
-0 Before
-0 Hit
-1 On_Hit
-Damage to 1: 4
-0 After
-1 End
-0 End
-(Feinting) Advance 2.
-Closing
-(Luc) Gain Force.
-(Luc) Gain 1 Time.
-(Luc) Gain Force.
-(Luc) Gain 1 Time.
-Character: Luc, Health: 16, Position: 3, Force: 2, discard: deque([(Memento, Strike): Range:(1, 1), Atk: 4, Prio: 7, Def: 5, (Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 1, Def: 2]), Time: 2
-Character: Luc, Health: 16, Position: 5, Force: 2, discard: deque([(Feinting, Burst): Range:(3, 4), Atk: 4, Prio: 0, Def: 2, (Memento, Grasp): Range:(1, 1), Atk: 2, Prio: 7, Def: 0]), Time: 2
-1 Pass
-0 (Guard Up) +2 Guard.
-1 Pass
-0 Pass
-[(Fusion, Grasp): Range:(1, 1), Atk: 2, Prio: 6, Def: 2, (Eternal, Strike): Range:(1, 1), Atk: 4, Prio: -1, Def: 5]
-0
-0 Start
-1 Start
-0 Before
-0 After
-1 Before
-1 After
-0 End
-1 End
-Closing
-(Luc) Gain 1 Time.
-(Luc) Gain Force.
-(Luc) Gain 1 Time.
-(Luc) Gain Force.
-Character: Luc, Health: 16, Position: 3, Force: 1, discard: deque([(Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 1, Def: 2, (Fusion, Grasp): Range:(1, 1), Atk: 2, Prio: 6, Def: 2]), Time: 3
-Character: Luc, Health: 16, Position: 5, Force: 3, discard: deque([(Memento, Grasp): Range:(1, 1), Atk: 2, Prio: 7, Def: 0, (Eternal, Strike): Range:(1, 1), Atk: 4, Prio: -1, Def: 5]), Time: 3
-1 (Priority Up) +2 Priority.
-0 (Time Rush) Cost: 3 Time. Start: Advance up to 2.
-1 (Time Surge) Cost: 1 Time. +1 Priority.
-0 Pass
-1 Pass
-[(Eternal, Drive): Range:(1, 1), Atk: 3, Prio: 0, Def: 0, (Feinting, Burst): Range:(3, 4), Atk: 4, Prio: 2, Def: 0]
-1
-1 Start
-(Burst) Retreat 1
-0 Start
-(Time Rush) Advance 2
-1 Before
-1 After
-0 Before
-0 Hit
-1 On_Hit
-Damage to 1: 3
-0 After
 1 End
 (Feinting) Advance 2.
 0 End
 Closing
-(Luc) Gain 1 Time.
 (Luc) Gain Force.
 (Luc) Gain 1 Time.
 (Luc) Gain Force.
-Character: Luc, Health: 16, Position: 5, Force: 2, discard: deque([(Fusion, Grasp): Range:(1, 1), Atk: 2, Prio: 6, Def: 2, (Eternal, Drive): Range:(1, 1), Atk: 3, Prio: 0, Def: 0]), Time: 1
-Character: Luc, Health: 13, Position: 3, Force: 2, discard: deque([(Eternal, Strike): Range:(1, 1), Atk: 4, Prio: -1, Def: 5, (Feinting, Burst): Range:(3, 4), Atk: 4, Prio: 2, Def: 0]), Time: 3
-1 (Power Up) +1 Power.
-0 (Time Surge) Cost: 1 Time. +1 Priority.
+(Luc) Gain 1 Time.
+Character: Luc, Health: 19, Position: 0, Force: 2, discard: deque([(Memento, Grasp): Range:(1, 1), Atk: 3, Prio: 7, Def: 0, (Eternal, Burst): Range:(2, 3), Atk: 3, Prio: -3, Def: 0]), Time: 1
+Character: Luc, Health: 20, Position: 3, Force: 2, discard: deque([(Eternal, Strike): Range:(1, 1), Atk: 4, Prio: 0, Def: 7, (Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 0, Def: 2]), Time: 3
 1 (Time Rush) Cost: 3 Time. Start: Advance up to 2.
-0 (Guard Up) +2 Guard.
+0 (Priority Up) +2 Priority.
 1 Pass
 0 Pass
-[(Memento, Strike): Range:(1, 1), Atk: 4, Prio: 5, Def: 7, (Chrono, Shot): Range:(1, 4), Atk: 4, Prio: 3, Def: 2]
-0
-0 Start
-1 Start
-(Time Rush) Advance 2
-0 Before
-0 Hit
-1 On_Hit
-Damage to 1: 4
-0 After
-0 End
-1 End
-Closing
-(Luc) Gain Force.
-(Luc) Gain 1 Time.
-(Luc) Gain 1 Time.
-(Luc) Gain Force.
-Character: Luc, Health: 16, Position: 5, Force: 1, discard: deque([(Eternal, Drive): Range:(1, 1), Atk: 3, Prio: 0, Def: 0, (Memento, Strike): Range:(1, 1), Atk: 4, Prio: 5, Def: 7]), Time: 1
-Character: Luc, Health: 9, Position: 6, Force: 2, discard: deque([(Feinting, Burst): Range:(3, 4), Atk: 4, Prio: 2, Def: 0, (Chrono, Shot): Range:(1, 4), Atk: 4, Prio: 3, Def: 2]), Time: 1
-1 (Time Surge) Cost: 1 Time. +1 Priority.
-0 Pass
-1 (Power Up) +1 Power.
-0 (Time Surge) Cost: 1 Time. +1 Priority.
-1 Pass
-0 Pass
-[(Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 1, Def: 2, (Fusion, Strike): Range:(1, 1), Atk: 5, Prio: 5, Def: 5]
+[(Feinting, Strike): Range:(2, 2), Atk: 5, Prio: 3, Def: 5, (Memento, Drive): Range:(1, 1), Atk: 3, Prio: 5, Def: 0]
 1
 1 Start
+(Time Rush) Do not Advance.
 0 Start
-(Feinting) Retreat 1
 1 Before
+(Drive) Advance 2
+1 Hit
+0 On_Hit
+Damage to 0: 3
 1 After
 0 Before
-0 Hit
-1 On_Hit
-Damage to 1: 4
 0 After
 1 End
 0 End
 (Feinting) Advance 1.
 Closing
-(Luc) Gain Force.
-(Luc) Gain 1 Time.
-(Luc) Gain Force.
-(Luc) Gain 1 Time.
-Character: Luc, Health: 16, Position: 5, Force: 2, discard: deque([(Memento, Strike): Range:(1, 1), Atk: 4, Prio: 5, Def: 7, (Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 1, Def: 2]), Time: 1
-Character: Luc, Health: 5, Position: 6, Force: 2, discard: deque([(Chrono, Shot): Range:(1, 4), Atk: 4, Prio: 3, Def: 2, (Fusion, Strike): Range:(1, 1), Atk: 5, Prio: 5, Def: 5]), Time: 1
-1 (Priority Up) +2 Priority.
-0 Pass
-1 (Time Surge) Cost: 1 Time. +1 Priority.
-0 (Guard Up) +2 Guard.
-1 Pass
-0 Pass
-Clashed pair: [(Chrono, Grasp): Range:(1, 1), Atk: 2, Prio: 6, Def: 2, (Feinting, Grasp): Range:(2, 2), Atk: 3, Prio: 6, Def: 0].
-[(Chrono, Burst): Range:(2, 3), Atk: 3, Prio: 2, Def: 2, (Feinting, Drive): Range:(2, 2), Atk: 4, Prio: 5, Def: 0]
-1
-1 Start
-0 Start
-(Burst) Retreat 1
-(Chrono) Do not advance.
-1 Before
-(Drive) Advance 1
-1 After
-0 Before
-0 After
-1 End
-(Feinting) Advance 1.
-0 End
-Closing
 (Luc) Gain 1 Time.
 (Luc) Gain Force.
 (Luc) Gain 1 Time.
 (Luc) Gain Force.
-Character: Luc, Health: 16, Position: 4, Force: 1, discard: deque([(Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 1, Def: 2, (Chrono, Burst): Range:(2, 3), Atk: 3, Prio: 2, Def: 2]), Time: 2
-Character: Luc, Health: 5, Position: 3, Force: 2, discard: deque([(Fusion, Strike): Range:(1, 1), Atk: 5, Prio: 5, Def: 5, (Feinting, Drive): Range:(2, 2), Atk: 4, Prio: 5, Def: 0]), Time: 1
+Character: Luc, Health: 16, Position: 2, Force: 1, discard: deque([(Eternal, Burst): Range:(2, 3), Atk: 3, Prio: -3, Def: 0, (Feinting, Strike): Range:(2, 2), Atk: 5, Prio: 3, Def: 5]), Time: 2
+Character: Luc, Health: 20, Position: 1, Force: 3, discard: deque([(Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 0, Def: 2, (Memento, Drive): Range:(1, 1), Atk: 3, Prio: 5, Def: 0]), Time: 1
 1 (Time Surge) Cost: 1 Time. +1 Priority.
 0 (Time Surge) Cost: 1 Time. +1 Priority.
 1 (Guard Up) +2 Guard.
 0 Pass
 1 Pass
-[(Eternal, Strike): Range:(1, 1), Atk: 4, Prio: 0, Def: 5, (Memento, Grasp): Range:(1, 1), Atk: 2, Prio: 7, Def: 2]
+[(Memento, Drive): Range:(1, 1), Atk: 3, Prio: 6, Def: 0, (Fusion, Grasp): Range:(1, 1), Atk: 2, Prio: 7, Def: 2]
 1
 1 Start
 0 Start
 1 Before
 1 Hit
+(Fusion 1) Push 1.
 (Grasp) Pull 1
 0 On_Hit
+Damage to 0: 2
+1 After
+1 End
+0 End
+Closing
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+Character: Luc, Health: 14, Position: 2, Force: 2, discard: deque([(Feinting, Strike): Range:(2, 2), Atk: 5, Prio: 3, Def: 5, (Memento, Drive): Range:(1, 1), Atk: 3, Prio: 6, Def: 0]), Time: 2
+Character: Luc, Health: 20, Position: 1, Force: 2, discard: deque([(Memento, Drive): Range:(1, 1), Atk: 3, Prio: 5, Def: 0, (Fusion, Grasp): Range:(1, 1), Atk: 2, Prio: 7, Def: 2]), Time: 1
+1 (Power Up) +1 Power.
+0 (Priority Up) +2 Priority.
+1 (Time Surge) Cost: 1 Time. +1 Priority.
+0 (Time Surge) Cost: 1 Time. +1 Priority.
+1 Pass
+0 Pass
+[(Chrono, Shot): Range:(1, 4), Atk: 3, Prio: 6, Def: 2, (Feinting, Burst): Range:(3, 4), Atk: 5, Prio: 0, Def: 0]
+0
+0 Start
+1 Start
+(Burst) Retreat 1
+0 Before
+0 Hit
+1 On_Hit
+Damage to 1: 3
+0 After
+0 End
+1 End
+(Feinting) Advance 1.
+Closing
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+Character: Luc, Health: 14, Position: 2, Force: 1, discard: deque([(Memento, Drive): Range:(1, 1), Atk: 3, Prio: 6, Def: 0, (Chrono, Shot): Range:(1, 4), Atk: 3, Prio: 6, Def: 2]), Time: 2
+Character: Luc, Health: 17, Position: 1, Force: 1, discard: deque([(Fusion, Grasp): Range:(1, 1), Atk: 2, Prio: 7, Def: 2, (Feinting, Burst): Range:(3, 4), Atk: 5, Prio: 0, Def: 0]), Time: 1
+1 Pass
+0 (Time Surge) Cost: 1 Time. +1 Priority.
+1 (Time Surge) Cost: 1 Time. +1 Priority.
+0 Pass
+1 Pass
+[(Feinting, Burst): Range:(3, 4), Atk: 4, Prio: 0, Def: 0, (Eternal, Shot): Range:(1, 4), Atk: 3, Prio: -1, Def: 2]
+0
+0 Start
+(Burst) Retreat 1
+(Feinting) Retreat 1
+1 Start
+0 Before
+0 Hit
+1 On_Hit
+Damage to 1: 3
+0 After
+0 End
+(Feinting) Advance 1.
+1 End
+Closing
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+Character: Luc, Health: 14, Position: 3, Force: 2, discard: deque([(Chrono, Shot): Range:(1, 4), Atk: 3, Prio: 6, Def: 2, (Feinting, Burst): Range:(3, 4), Atk: 4, Prio: 0, Def: 0]), Time: 2
+Character: Luc, Health: 14, Position: 1, Force: 2, discard: deque([(Feinting, Burst): Range:(3, 4), Atk: 5, Prio: 0, Def: 0, (Eternal, Shot): Range:(1, 4), Atk: 3, Prio: -1, Def: 2]), Time: 1
+1 Pass
+0 (Priority Up) +2 Priority.
+1 (Priority Up) +2 Priority.
+0 (Time Surge) Cost: 1 Time. +1 Priority.
+1 (Time Surge) Cost: 1 Time. +1 Priority.
+0 Pass
+1 Pass
+[(Eternal, Drive): Range:(1, 1), Atk: 3, Prio: 3, Def: 0, (Fusion, Drive): Range:(1, 1), Atk: 3, Prio: 8, Def: 0]
+1
+1 Start
+0 Start
+1 Before
+(Drive) Advance 2
+1 Hit
+(Fusion 1) Push 2.
+0 On_Hit
 (Eternal) Spend 1 Time Tokens for Soak 1.
-Damage to 0: 0
+Damage to 0: 1
+1 After
+1 End
+0 End
+Closing
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+Character: Luc, Health: 13, Position: 1, Force: 1, discard: deque([(Feinting, Burst): Range:(3, 4), Atk: 4, Prio: 0, Def: 0, (Eternal, Drive): Range:(1, 1), Atk: 3, Prio: 3, Def: 0]), Time: 1
+Character: Luc, Health: 14, Position: 4, Force: 1, discard: deque([(Eternal, Shot): Range:(1, 4), Atk: 3, Prio: -1, Def: 2, (Fusion, Drive): Range:(1, 1), Atk: 3, Prio: 8, Def: 0]), Time: 1
+1 Pass
+0 Pass
+Clashed pair: [(Fusion, Grasp): Range:(1, 1), Atk: 2, Prio: 6, Def: 0, (Memento, Grasp): Range:(1, 1), Atk: 2, Prio: 6, Def: 0].
+[(Fusion, Shot): Range:(1, 4), Atk: 3, Prio: 3, Def: 2, (Memento, Strike): Range:(1, 1), Atk: 4, Prio: 4, Def: 5]
+1
+1 Start
+0 Start
+1 Before
+1 After
+0 Before
+0 Hit
+(Fusion 1) Push 1.
+1 On_Hit
+Damage to 1: 3
+0 After
+1 End
+0 End
+Closing
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+Character: Luc, Health: 13, Position: 1, Force: 2, discard: deque([(Eternal, Drive): Range:(1, 1), Atk: 3, Prio: 3, Def: 0, (Fusion, Shot): Range:(1, 4), Atk: 3, Prio: 3, Def: 2]), Time: 2
+Character: Luc, Health: 11, Position: 5, Force: 2, discard: deque([(Fusion, Drive): Range:(1, 1), Atk: 3, Prio: 8, Def: 0, (Memento, Strike): Range:(1, 1), Atk: 4, Prio: 4, Def: 5]), Time: 2
+1 (Guard Up) +2 Guard.
+0 (Priority Up) +2 Priority.
+1 Pass
+0 Pass
+[(Feinting, Strike): Range:(2, 2), Atk: 5, Prio: 3, Def: 5, (Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 0, Def: 4]
+0
+0 Start
+(Feinting) Retreat 1
+1 Start
+(Feinting) Retreat 1
+0 Before
+0 After
+1 Before
+1 After
+0 End
+(Feinting) Advance 1.
+1 End
+(Feinting) Advance 2.
+Closing
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+Character: Luc, Health: 13, Position: 1, Force: 1, discard: deque([(Fusion, Shot): Range:(1, 4), Atk: 3, Prio: 3, Def: 2, (Feinting, Strike): Range:(2, 2), Atk: 5, Prio: 3, Def: 5]), Time: 3
+Character: Luc, Health: 11, Position: 4, Force: 1, discard: deque([(Memento, Strike): Range:(1, 1), Atk: 4, Prio: 4, Def: 5, (Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 0, Def: 4]), Time: 3
+1 (Time Rush) Cost: 3 Time. Start: Advance up to 2.
+0 (Time Surge) Cost: 1 Time. +1 Priority.
+1 Pass
+0 Pass
+[(Chrono, Burst): Range:(2, 3), Atk: 3, Prio: 3, Def: 0, (Chrono, Drive): Range:(1, 1), Atk: 3, Prio: 5, Def: 0]
+1
+1 Start
+(Time Rush) Advance 1
+0 Start
+(Chrono) Do not advance.
+(Burst) Retreat 1
+1 Before
+(Drive) Advance 2
+1 Hit
+0 On_Hit
+Damage to 0: 3
+1 After
+1 End
+0 End
+Closing
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+Character: Luc, Health: 10, Position: 0, Force: 2, discard: deque([(Feinting, Strike): Range:(2, 2), Atk: 5, Prio: 3, Def: 5, (Chrono, Burst): Range:(2, 3), Atk: 3, Prio: 3, Def: 0]), Time: 3
+Character: Luc, Health: 11, Position: 1, Force: 2, discard: deque([(Feinting, Shot): Range:(2, 5), Atk: 4, Prio: 0, Def: 4, (Chrono, Drive): Range:(1, 1), Atk: 3, Prio: 5, Def: 0]), Time: 1
+1 (Power Up) +1 Power.
+0 (Guard Up) +2 Guard.
+1 Pass
+0 Pass
+[(Eternal, Drive): Range:(1, 1), Atk: 3, Prio: 0, Def: 2, (Fusion, Burst): Range:(2, 3), Atk: 4, Prio: 2, Def: 0]
+1
+1 Start
+(Burst) Retreat 2
+0 Start
+1 Before
+1 Hit
+(Fusion 2) If the opponent is at the edge of the board, they lose 2 life.
+0 On_Hit
+(Eternal) Do not spend Time Tokens.
+Damage to 0: 3
+1 After
+1 End
+0 End
+Closing
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+Character: Luc, Health: 5, Position: 0, Force: 2, discard: deque([(Chrono, Burst): Range:(2, 3), Atk: 3, Prio: 3, Def: 0, (Eternal, Drive): Range:(1, 1), Atk: 3, Prio: 0, Def: 2]), Time: 4
+Character: Luc, Health: 11, Position: 3, Force: 1, discard: deque([(Chrono, Drive): Range:(1, 1), Atk: 3, Prio: 5, Def: 0, (Fusion, Burst): Range:(2, 3), Atk: 4, Prio: 2, Def: 0]), Time: 2
+1 Pass
+0 (Time Rush) Cost: 3 Time. Start: Advance up to 2.
+1 Pass
+0 Pass
+[(Fusion, Shot): Range:(1, 4), Atk: 3, Prio: 3, Def: 2, (Eternal, Shot): Range:(1, 4), Atk: 3, Prio: -2, Def: 2]
+0
+0 Start
+(Time Rush) Advance 1
+1 Start
+0 Before
+0 Hit
+(Fusion 1) Push 1.
+1 On_Hit
+(Eternal) Do not spend Time Tokens.
+Damage to 1: 2
+0 After
+1 Before
+1 Hit
+0 On_Hit
+Damage to 0: 3
+1 After
+0 End
+1 End
+Closing
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+Character: Luc, Health: 2, Position: 1, Force: 4, discard: deque([(Eternal, Drive): Range:(1, 1), Atk: 3, Prio: 0, Def: 2, (Fusion, Shot): Range:(1, 4), Atk: 3, Prio: 3, Def: 2]), Time: 2
+Character: Luc, Health: 9, Position: 4, Force: 2, discard: deque([(Fusion, Burst): Range:(2, 3), Atk: 4, Prio: 2, Def: 0, (Eternal, Shot): Range:(1, 4), Atk: 3, Prio: -2, Def: 2]), Time: 3
+1 (Time Surge) Cost: 1 Time. +1 Priority.
+0 (Power Up) +1 Power.
+1 (Guard Up) +2 Guard.
+0 (Time Surge) Cost: 1 Time. +1 Priority.
+1 Pass
+0 Pass
+[(Memento, Burst): Range:(2, 3), Atk: 4, Prio: 3, Def: 0, (Memento, Drive): Range:(1, 1), Atk: 3, Prio: 6, Def: 2]
+1
+1 Start
+0 Start
+(Burst) Retreat 1
+1 Before
+(Drive) Advance 2
 1 After
 0 Before
 0 Hit
@@ -211,20 +333,49 @@ Damage to 1: 4
 1 End
 0 End
 Closing
-(Luc) Gain Force.
-(Luc) Gain 1 Time.
 (Luc) Gain 1 Time.
 (Luc) Gain Force.
-Character: Luc, Health: 16, Position: 2, Force: 2, discard: deque([(Chrono, Burst): Range:(2, 3), Atk: 3, Prio: 2, Def: 2, (Eternal, Strike): Range:(1, 1), Atk: 4, Prio: 0, Def: 5]), Time: 1
-Character: Luc, Health: 1, Position: 3, Force: 2, discard: deque([(Feinting, Drive): Range:(2, 2), Atk: 4, Prio: 5, Def: 0, (Memento, Grasp): Range:(1, 1), Atk: 2, Prio: 7, Def: 2]), Time: 1
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+Character: Luc, Health: 2, Position: 0, Force: 4, discard: deque([(Fusion, Shot): Range:(1, 4), Atk: 3, Prio: 3, Def: 2, (Memento, Burst): Range:(2, 3), Atk: 4, Prio: 3, Def: 0]), Time: 2
+Character: Luc, Health: 5, Position: 2, Force: 2, discard: deque([(Eternal, Shot): Range:(1, 4), Atk: 3, Prio: -2, Def: 2, (Memento, Drive): Range:(1, 1), Atk: 3, Prio: 6, Def: 2]), Time: 3
+1 (Time Rush) Cost: 3 Time. Start: Advance up to 2.
+0 (Power Up) +1 Power.
 1 (Power Up) +1 Power.
+0 Pass
+1 Pass
+Clashed pair: [(Chrono, Grasp): Range:(1, 1), Atk: 3, Prio: 6, Def: 0, (Chrono, Grasp): Range:(1, 1), Atk: 3, Prio: 6, Def: 0].
+[(Chrono, Drive): Range:(1, 1), Atk: 4, Prio: 5, Def: 0, (Chrono, Burst): Range:(2, 3), Atk: 4, Prio: 2, Def: 0]
+0
+0 Start
+(Chrono) Spend 1 time to advance 1.
+1 Start
+(Burst) Retreat 2
+(Time Rush) Advance 1
+0 Before
+(Drive) Advance 1
+0 Hit
+1 On_Hit
+Damage to 1: 4
+0 After
+0 End
+1 End
+Closing
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+(Luc) Gain 1 Time.
+(Luc) Gain Force.
+Character: Luc, Health: 2, Position: 2, Force: 4, discard: deque([(Memento, Burst): Range:(2, 3), Atk: 4, Prio: 3, Def: 0, (Chrono, Drive): Range:(1, 1), Atk: 4, Prio: 5, Def: 0]), Time: 2
+Character: Luc, Health: 1, Position: 3, Force: 2, discard: deque([(Memento, Drive): Range:(1, 1), Atk: 3, Prio: 6, Def: 2, (Chrono, Burst): Range:(2, 3), Atk: 4, Prio: 2, Def: 0]), Time: 1
+1 Pass
 0 (Guard Up) +2 Guard.
+1 (Priority Up) +2 Priority.
+0 Pass
 1 (Time Surge) Cost: 1 Time. +1 Priority.
-0 (Time Surge) Cost: 1 Time. +1 Priority.
+0 (Power Up) +1 Power.
 1 Pass
 0 Pass
-Clashed pair: [(Feinting, Drive): Range:(2, 2), Atk: 4, Prio: 3, Def: 2, (Chrono, Burst): Range:(2, 3), Atk: 4, Prio: 3, Def: 0].
-[(Feinting, Grasp): Range:(2, 2), Atk: 3, Prio: 4, Def: 2, (Chrono, Strike): Range:(1, 1), Atk: 5, Prio: 5, Def: 5]
+[(Feinting, Shot): Range:(2, 5), Atk: 5, Prio: 0, Def: 4, (Fusion, Strike): Range:(1, 1), Atk: 4, Prio: 7, Def: 5]
 1
 1 Start
 0 Start
@@ -233,9 +384,8 @@ Clashed pair: [(Feinting, Drive): Range:(2, 2), Atk: 4, Prio: 3, Def: 2, (Chrono
 1 After
 0 Before
 0 Hit
-(Grasp) Push 1
 1 On_Hit
-Damage to 1: 3
+Damage to 1: 5
 0 After
 1 End
 0 End
@@ -245,8 +395,8 @@ Closing
 (Luc) Gain Force.
 (Luc) Gain 1 Time.
 (Luc) Gain Force.
-Character: Luc, Health: 16, Position: 3, Force: 1, discard: deque([(Eternal, Strike): Range:(1, 1), Atk: 4, Prio: 0, Def: 5, (Feinting, Grasp): Range:(2, 2), Atk: 3, Prio: 4, Def: 2]), Time: 1
-Character: Luc, Health: 0, Position: 4, Force: 2, discard: deque([(Memento, Grasp): Range:(1, 1), Atk: 2, Prio: 7, Def: 2, (Chrono, Strike): Range:(1, 1), Atk: 5, Prio: 5, Def: 5]), Time: 1
+Character: Luc, Health: 2, Position: 4, Force: 2, discard: deque([(Chrono, Drive): Range:(1, 1), Atk: 4, Prio: 5, Def: 0, (Feinting, Shot): Range:(2, 5), Atk: 5, Prio: 0, Def: 4]), Time: 3
+Character: Luc, Health: 0, Position: 3, Force: 2, discard: deque([(Chrono, Burst): Range:(2, 3), Atk: 4, Prio: 2, Def: 0, (Fusion, Strike): Range:(1, 1), Atk: 4, Prio: 7, Def: 5]), Time: 1
 [1. 0.]
 
 C:\Users\alexm\Python tests\bot\BCObot>
